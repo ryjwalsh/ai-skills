@@ -1,10 +1,3 @@
-# test line one
-- bullet a
-- bullet b
-
-| a | b |
-|---|---|
-| 1 | 2 |
 ---
 name: genetec-security-center
 description: Comprehensive knowledge of Genetec Security Center 5.13-5.14: architecture, install/silent install, upgrade paths, default ports, configuration, hardening, operations, logging, troubleshooting, and SDK/API. Use whenever Security Center, Config Tool, Security Desk, Server Admin, Directory, Archiver, Media Router, Access Manager, ALPR Manager, AutoVu, Synergis, Omnicast, Mission Control or Genetec SaaS is mentioned, or when terms like Genetec Server service, .gconfig, or LPM protocol appear.
