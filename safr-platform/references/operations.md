@@ -2,10 +2,27 @@
 
 All commands are verbatim from the vendor docs. Source IDs refer to `sources.md`.
 
+## Contents
+
+| Section | Topic |
+|---|---|
+| 1 | Script location |
+| 2 | Start, stop, status |
+| 3 | Port inventory |
+| 4 | Support bundle (syscollect) |
+| 5 | Logging: levels, domains, paths, defaults |
+| 6 | Hostname and certificates |
+| 7 | Port reconfiguration |
+| 8 | Licensing helpers |
+| 9 | Cluster join |
+| 10 | Backup entry points |
+| 11 | Destructive commands |
+| 12 | Internal-use-only scripts |
+| 13 | Monitoring hooks |
+
 ## 1. Script location
 
-The SAFR Platform installation includes several scripts to manage and monitor your server,
-located in the `bin` folder under the SAFR Platform installation location. [S4]
+The SAFR Platform installation includes several scripts to manage and monitor your server, located in the `bin` folder under the SAFR Platform installation location. [S4]
 
 | OS | `bin` path |
 |---|---|
@@ -13,13 +30,11 @@ located in the `bin` folder under the SAFR Platform installation location. [S4]
 | Linux | `/opt/RealNetworks/SAFR/bin` |
 | Windows | `C:\Program Files\RealNetworks\SAFR\bin` |
 
-Documented caveat: some of these scripts may not work if you are accessing the SAFR Platform
-through the NVIDIA Metropolis Application Framework (MAF). [S4]
+Documented caveat: some of these scripts may not work if you are accessing the SAFR Platform through the NVIDIA Metropolis Application Framework (MAF). [S4]
 
 ## 2. Start, stop, and status
 
-The `check` script checks the status of SAFR Server services. `start` and `stop` act on all
-SAFR Server services **on the current machine** - in a cluster you must repeat per node. [S4]
+The `check` script checks the status of SAFR Server services. `start` and `stop` act on all SAFR Server services **on the current machine** - in a cluster you must repeat per node. [S4]
 
 | Action | macOS | Linux | Windows |
 |---|---|---|---|
@@ -27,12 +42,13 @@ SAFR Server services **on the current machine** - in a cluster you must repeat p
 | Start | `/Library/RealNetworks/SAFR/bin/start` | `/opt/RealNetworks/SAFR/bin/start` | `"C:\Program Files\RealNetworks\SAFR\bin\start.bat"` |
 | Stop | `/Library/RealNetworks/SAFR/bin/stop` | `/opt/RealNetworks/SAFR/bin/stop` | `"C:\Program Files\RealNetworks\SAFR\bin\stop.bat"` |
 
-The Linux/Jetson `start` and `stop` paths are documented as "On Linux or Jetson". [S4]
+The Linux paths are documented as "On Linux or Jetson". [S4]
+
+There is no documented way to restart a **single** sub-system from these scripts, and Windows service display names are not published, so per-service restarts are **Not documented**. The only documented single-service manipulation is stopping the CoVi service on secondaries during a cluster upgrade. [S7]
 
 ## 3. Port inventory on a live server
 
-`portcheck` lists all the ports that SAFR services are using. This is the only documented way
-to discover the actual port assignments - there is no static port table in the docs. [S4]
+`portcheck` lists all the ports that SAFR services are using. [S4]
 
 | OS | Command |
 |---|---|
@@ -40,13 +56,11 @@ to discover the actual port assignments - there is no static port table in the d
 | Linux | `sudo python /opt/RealNetworks/SAFR/bin/portcheck.py` |
 | Windows | `python "C:\Program Files\RealNetworks\SAFR\bin\portcheck.py"` |
 
-See `network-ports.md` for why this matters.
+See `network-ports.md`.
 
 ## 4. Support bundle for a vendor ticket
 
-`syscollect` collects all the necessary logs, stats, and configuration files into a single
-archive file that can be easily emailed to SAFR sales support engineers. **Run this before
-opening a ticket.** [S4]
+`syscollect` collects all the necessary logs, stats, and configuration files into a single archive file that can be easily emailed to SAFR sales support engineers. **Run this before opening a ticket.** [S4]
 
 | OS | Command | Archive output |
 |---|---|---|
@@ -55,8 +69,6 @@ opening a ticket.** [S4]
 
 macOS is **Not documented** for `syscollect`. [S4]
 
-Optional arguments [S4]:
-
 | Argument | Effect |
 |---|---|
 | `-h`, `--help` | Lists all the optional arguments available for this script |
@@ -64,14 +76,11 @@ Optional arguments [S4]:
 | `-q`, `--quiet` | Quiet mode; command line output is suppressed |
 | `-v`, `--verbose` | Verbose command line output for debugging purposes |
 
-Note: the docs render these long options with an en dash. Type them as two ASCII hyphens.
-[INFERRED - verify]
+Note: the docs render long options with an en dash. Type them as two ASCII hyphens. [INFERRED - verify]
 
 ## 5. Logging
 
-SAFR Server offers customizable logging at each level for each of the core systems: Computer
-Vision Service (COVI), Event Server, Video Recognition Gateway Admin Service (VIRGA), Reports,
-and Computer Object Service (CVOS). [S3]
+SAFR Server offers customizable logging at each level for each of the core systems: Computer Vision Service (COVI), Event Server, Video Recognition Gateway Admin Service (VIRGA), Reports, and Computer Object Service (CVOS). [S3]
 
 ### 5.1 Levels
 
@@ -99,8 +108,7 @@ and Computer Object Service (CVOS). [S3]
 
 ### 5.3 Changing log levels
 
-Logging configurations are stored in `logback-spring.xml` files, located in the `config`
-directories of the services they pertain to (COVI, Events, CVOS, and so on). [S3]
+Logging configurations are stored in `logback-spring.xml` files, located in the `config` directories of the services they pertain to (COVI, Events, CVOS, and so on). [S3]
 
 Application log level - edit the root logger:
 
@@ -110,7 +118,7 @@ Application log level - edit the root logger:
 </root>
 ```
 
-A named domain, e.g. Performance:
+A named domain, for example Performance:
 
 ```xml
 <logger name="Performance" level="INFO" additivity="false">
@@ -126,8 +134,7 @@ A single code module, useful to zero in on an issue or to suppress noise:
 
 ### 5.4 Default levels, paths, retention, rotation
 
-Paths are relative to the install location. The doc states the default install location on
-Windows is `C:\ProgramData\RealNetworks\SAFR\`. [S3]
+Paths are relative to the install location. The doc states the default install location on Windows is `C:\ProgramData\RealNetworks\SAFR\`. [S3]
 
 | Sub-system | Domain | Default level | Log file | Retention | Rotation |
 |---|---|---|---|---|---|
@@ -160,119 +167,91 @@ Windows is `C:\ProgramData\RealNetworks\SAFR\`. [S3]
 | CVOS | Container | `WARN` | `cv-object-storage\logs\cv-object-storage.out` | N/A | N/A |
 | CVOS | STDERR | N/A | `cv-object-storage\logs\cv-object-storage.err` | N/A | N/A |
 
-Two operational consequences worth stating unprompted:
+Two consequences worth stating unprompted:
 
-1. **Application logs default to `WARN` on four of the five sub-systems**, so an INFO-level
-   trace of a recognition or identity change will not exist unless someone raised the level
-      first. Reproduce with `INFO`/`DEBUG` before concluding "nothing in the logs".
-      2. **Retention is 14 days.** An intermittent fault reported weeks later may already have aged
-         out. Run `syscollect` early.
+| Consequence | Why it matters |
+|---|---|
+| Application logs default to `WARN` on COVI, Event Server, VIRGA and CVOS | An INFO-level trace of a recognition or identity change does not exist unless someone raised the level first. Reproduce at `INFO` or `DEBUG` before concluding "nothing in the logs" |
+| Retention is 14 days | An intermittent fault reported weeks later may already have aged out. Run `syscollect` early |
 
-         The source table contains a typographical error, printing the Event Server Feature default as
-         `INF0` with a zero. Read as `INFO`. [S3]
+The source table contains a typographical error, printing the Event Server Feature default as `INF0` with a zero. Read as `INFO`. [S3]
 
-         ## 6. Hostname and certificate operations
+## 6. Hostname and certificate operations
 
-         `reconfigure` configures the hostname used by the SAFR Server. Run it when configuring the
-         server to use a DNS hostname with an SSL certificate. It requires administrator privileges -
-         it automatically asks for admin privileges on Windows and requires `sudo` on macOS and Linux.
-         If no arguments are passed you will be prompted. [S4]
+`reconfigure` configures the hostname used by the SAFR Server. Run it when configuring the server to use a DNS hostname with an SSL certificate. It requires administrator privileges - it automatically asks for admin privileges on Windows and requires `sudo` on macOS and Linux. If no arguments are passed you will be prompted. [S4]
 
-         ```
-         sudo /Library/RealNetworks/SAFR/bin/reconfigure <HOSTNAME> <SSL CERTIFICATE CHAIN?>
-         sudo /opt/RealNetworks/SAFR/bin/reconfigure <HOSTNAME> <SSL CERTIFICATE CHAIN?>
-         "C:\Program Files\RealNetworks\SAFR\bin\reconfigure.bat" <HOSTNAME> <SSL CERTIFICATE CHAIN?>
-         ```
+```
+sudo /Library/RealNetworks/SAFR/bin/reconfigure <HOSTNAME> <SSL CERTIFICATE CHAIN?>
+sudo /opt/RealNetworks/SAFR/bin/reconfigure <HOSTNAME> <SSL CERTIFICATE CHAIN?>
+"C:\Program Files\RealNetworks\SAFR\bin\reconfigure.bat" <HOSTNAME> <SSL CERTIFICATE CHAIN?>
+```
 
-         Documented examples [S4]:
+Documented examples [S4]:
 
-         ```
-         /Library/RealNetworks/SAFR/bin/reconfigure 192.168.123.124 y
-         /opt/RealNetworks/SAFR/bin/reconfigure 192.168.123.124 n
-         "C:\Program Files\RealNetworks\SAFR\bin\reconfigure.bat" 192.168.123.124 y
-         ```
+```
+/Library/RealNetworks/SAFR/bin/reconfigure 192.168.123.124 y
+/opt/RealNetworks/SAFR/bin/reconfigure 192.168.123.124 n
+"C:\Program Files\RealNetworks\SAFR\bin\reconfigure.bat" 192.168.123.124 y
+```
 
-         `configure-ssl` manages the SAFR Server's self-signed SSL certificate. Arguments [S4]:
+`configure-ssl` manages the self-signed SSL certificate; see `network-ports.md` section 5.1 for its full argument table. Only `-p` / `--public-key` is read-only; the rest change state and must not be run as a diagnostic step. [S4] [S11]
 
-         | Argument | Effect |
-         |---|---|
-         | `-d`, `--default-cert` | Reset to the factory default SSL certificate and key |
-         | `-g`, `--generate-cert` | Generate a new SSL self-signed certificate and key |
-         | `-p`, `--public-key` | Display the current SSL certificate's public key |
-         | `-c`, `--config` | Only change certificates; do not stop or start services |
-         | `-v`, `--verbose` | Enable DEBUG level logging |
-         | `-q`, `--quiet` | Display only ERROR logs |
-         | `-f`, `--force` | Override warnings |
+## 7. Port reconfiguration
 
-         Only `-p` / `--public-key` is read-only. The others change state; do not run them as a
-         diagnostic step.
+`configure-ports` customizes the ports SAFR services listen on, typically done only if there is a conflict with existing software on the same server. It takes no arguments and relies on `safrports.conf`. [S4]
 
-         ## 7. Port reconfiguration
+| OS | `safrports.conf` |
+|---|---|
+| macOS | `/Library/RealNetworks/SAFR/safrports.conf` |
+| Linux | `/opt/RealNetworks/SAFR/safrports.conf` |
+| Windows | `C:\Program Files\RealNetworks\SAFR\safrports.conf` |
 
-         `configure-ports` customizes the ports SAFR services listen on, typically done only if there
-         is a conflict with existing software on the same server. It takes no arguments and relies on
-         `safrports.conf`. [S4]
+Documented installer behaviour on conflict: the ports in conflict are reported, Notepad is launched to edit `safrports.conf`, and the SAFR Platform installer is automatically relaunched after new non-conflicting ports are chosen. [S4]
 
-         | OS | `safrports.conf` |
-         |---|---|
-         | macOS | `/Library/RealNetworks/SAFR/safrports.conf` |
-         | Linux | `/opt/RealNetworks/SAFR/safrports.conf` |
-         | Windows | `C:\Program Files\RealNetworks\SAFR\safrports.conf` |
+## 8. Licensing helper scripts
 
-         Documented installer behaviour when port conflicts are detected during installation: the ports
-         in conflict are reported, Notepad is launched to edit `safrports.conf`, and the SAFR Platform
-         installer is automatically relaunched after new non-conflicting ports are chosen. [S4]
+`get-license`, `get-license-request`, and `insert-license` are used as part of getting an on-premises license when the SAFR system doesn't have Internet connectivity. Full procedure in `install-upgrade.md` sections 7 and 8. [S4] [S9]
 
-         ## 8. Licensing helper scripts
+## 9. Cluster join
 
-         `get-license`, `get-license-request`, and `insert-license` are used as part of getting an
-         on-premises license when the SAFR system doesn't have Internet connectivity. See
-         `install-upgrade.md`. [S4]
+`safr-worker` joins secondary SAFR Servers to the SAFR server cluster. [S4]
 
-         ## 9. Cluster join
+## 10. Backup entry points
 
-         `safr-worker` joins secondary SAFR Servers to the SAFR server cluster. [S4]
+```
+python backup.py
+sudo python backup.py
+python "C:\Program Files\RealNetworks\SAFR\bin\backup.py" -o
+python restore.py BACKUPFILENAME
+```
 
-         ## 10. Backup
+Full argument table, output paths, and the Windows Task Scheduler recipe are in `install-upgrade.md` sections 9 to 11. [S6] [S8]
 
-         From the storage migration procedure, the documented backup entry points are [S6]:
+## 11. Destructive - do not run as diagnostics
 
-         ```
-         python /opt/RealNetworks/SAFR/bin/backup.py
-         python /opt/RealNetworks/SAFR/bin/backup.py -o
-         python "C:\Program Files\RealNetworks\SAFR\bin\backup.py"
-         python "C:\Program Files\RealNetworks\SAFR\bin\backup.py" -o
-         ```
+`uninstaller` removes the SAFR Platform entirely: it closes all SAFR applications, stops all SAFR services, then removes all SAFR services and data. On Windows you must select the optional ProgramData component to remove config files, logs, and database files. [S4]
 
-         The `-o` form is the one used on redundant secondary servers. With **shared** object storage
-         backup runs from the primary server only; with **local** object storage backups must be run on
-         every redundant server that has Object Storage enabled. [S6] Full semantics of `-o` are
-         **Not documented** on the pages retrieved.
+| OS | Path |
+|---|---|
+| macOS | `/Library/RealNetworks/SAFR/uninstaller` |
+| Linux | `/opt/RealNetworks/SAFR/uninstaller` |
+| Windows | `"C:\Program Files\RealNetworks\SAFR\uninstaller.exe"` |
 
-         ## 11. Destructive - do not run as diagnostics
+## 12. Internal use only - never run these
 
-         `uninstaller` removes the SAFR Platform entirely: it closes all SAFR applications, stops all
-         SAFR services, then removes all SAFR services and data. On Windows you must select the optional
-         ProgramData component to remove config files, logs, and database files. [S4]
+The docs explicitly mark these as internal to the `SAFR\bin` folder. [S4]
 
-         ## 12. Internal use only - never run these
+| Script | Documented role |
+|---|---|
+| `cleanup.py` | Part of the SAFR uninstallation process |
+| `configure-faceservice.py` | Part of the creation and configuration of VIRGO video feeds |
+| `configure-firewall.py` | Windows only. Part of the port reconfiguration process |
+| `configure-ip.py` | Part of the SAFR Platform installation process |
+| `proxy-discover.py` | Used during auto-discovery of the primary SAFR Server |
+| `server-status.py` | Used during creation of SAFR Server's logs |
+| `update-password.py` | Used to propagate a newly changed account password across the SAFR system |
+| `upgrade.py` | Used by the `reconfigure` script to help set the hostname of the SAFR Server |
 
-         The docs explicitly mark these as internal to the `SAFR\bin` folder. [S4]
+## 13. Monitoring hooks
 
-         | Script | Documented role |
-         |---|---|
-         | `cleanup.py` | Part of the SAFR uninstallation process |
-         | `configure-faceservice.py` | Part of the creation and configuration of VIRGO video feeds |
-         | `configure-firewall.py` | Windows only. Part of the port reconfiguration process |
-         | `configure-ip.py` | Part of the SAFR Platform installation process |
-         | `proxy-discover.py` | Used during auto-discovery of the primary SAFR Server |
-         | `server-status.py` | Used during creation of SAFR Server's logs |
-         | `update-password.py` | Used to propagate a newly changed account password across the SAFR system |
-         | `upgrade.py` | Used by the `reconfigure` script to help set the hostname of the SAFR Server |
-
-         ## 13. Monitoring hooks
-
-         SNMP, syslog forwarding, and a machine-readable health endpoint are **Not documented** on the
-         pages retrieved. The documented health surfaces are the `check` script [S4] and the Web Console
-         Status page [S14]. Logged to `known-gaps.md`.
-         
+SNMP, syslog forwarding, and a machine-readable health endpoint are **Not documented** on the pages retrieved. The documented health surfaces are the `check` script [S4] and the Web Console Status page [S14]. Logged to `known-gaps.md`.
