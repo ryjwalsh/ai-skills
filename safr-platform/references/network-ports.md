@@ -1,15 +1,19 @@
 # SAFR Networking, Ports, and TLS
 
-## 1. Read this first: there is no published port table
+## 1. Read this first: there is almost no published port table
 
-**The SAFR documentation set retrieved does not contain a port table.** No page gives
-`port | protocol | direction | purpose`. Targeted searching for a ports or firewall
-requirements document returned nothing. This is a genuine documentation gap, not an omission in
-this skill - see `known-gaps.md`.
+**The SAFR documentation set retrieved contains no port table.** No page gives `port | protocol | direction | purpose`. Targeted searching for a ports or firewall requirements document returned nothing. This is a genuine documentation gap - see `known-gaps.md`.
 
-Consequence: **never quote a SAFR port number from memory.** Ports are site-specific because
-they are declared in a local config file and can be rewritten at install time to resolve
-conflicts. Derive them from the running system instead. [S4]
+Only **two** concrete port facts exist anywhere in the retrieved docs:
+
+| Port | Host / service | Direction | Purpose | Source |
+|---|---|---|---|---|
+| `443` | `cv-instam.real` | Outbound, SAFR Server to Internet | Reach the SAFR License Server. The server discontinues operation if it cannot report within Max Days Between Reports | [S9] |
+| `8080` | CoVi on the local SAFR install | Local | **Fallback default only.** `get-license-request.py` uses port `8080` if it cannot find `safrports.conf` | [S9] |
+
+The hostname `cv-instam.real` is reproduced exactly as printed and looks truncated or internal; confirm the FQDN with the vendor before writing a firewall rule. [INFERRED - verify]
+
+Consequence: **never quote any other SAFR port number from memory.** Ports are site-specific because they are declared in a local config file and can be rewritten at install time to resolve conflicts. [S4]
 
 ## 2. How to obtain the real port list
 
@@ -21,8 +25,7 @@ conflicts. Derive them from the running system instead. [S4]
 | Linux | `sudo python /opt/RealNetworks/SAFR/bin/portcheck.py` |
 | Windows | `python "C:\Program Files\RealNetworks\SAFR\bin\portcheck.py"` |
 
-This is read-only and is the correct first step for any firewall question. Capture its output
-before raising a change request.
+Read-only, and the correct first step for any firewall question. Capture its output before raising a change request.
 
 ## 3. Where ports are defined
 
@@ -34,42 +37,31 @@ before raising a change request.
 | Linux | `/opt/RealNetworks/SAFR/safrports.conf` |
 | Windows | `C:\Program Files\RealNetworks\SAFR\safrports.conf` |
 
-Install-time conflict behaviour: conflicting ports are reported, Notepad is launched to edit
-`safrports.conf`, and the installer relaunches automatically once non-conflicting ports are
-chosen. [S4] The file's syntax and its default contents are **Not documented**.
+Install-time conflict behaviour: conflicting ports are reported, Notepad is launched to edit `safrports.conf`, and the installer relaunches automatically once non-conflicting ports are chosen. [S4] The file's syntax and default contents are **Not documented**.
 
-On Windows, `configure-firewall.py` exists in `SAFR\bin` and is documented as part of the port
-reconfiguration process, but it is explicitly marked **internal use only** - do not invoke it
-directly. [S4] Its existence implies SAFR manages Windows Firewall rules itself during port
-reconfiguration. [INFERRED - verify]
+On Windows, `configure-firewall.py` exists in `SAFR\bin` and is documented as part of the port reconfiguration process, but it is explicitly marked **internal use only** - do not invoke it directly. [S4] Its existence implies SAFR manages Windows Firewall rules itself during port reconfiguration. [INFERRED - verify]
 
 ## 4. Traffic patterns you can state from the docs
 
-These are directional facts, not port numbers. [S6]
+Directional facts, not port numbers.
 
 | Flow | Notes |
 |---|---|
 | SAFR components and browsers to SAFR Server | HTTPS; certificates cover SAFR Desktop Clients, SAFR Mobile Clients, and third-party applications such as web browsers [S11] |
-| Secondary servers to primary server | Cluster join via `safr-worker`; primary is auto-discovered by `proxy-discover.py` internally [S4] |
+| Secondary servers to primary server | Cluster join via `safr-worker`; the primary is auto-discovered internally by `proxy-discover.py` [S4] |
 | Primary server to redundant secondaries | Object Storage Service requests are load-balanced by the primary [S6] |
-| Between servers | Database replica set traffic for redundant secondaries [S6] |
+| Server to server | Database replica set traffic between redundant servers [S6] |
 | Any server to shared storage | Direct read and write to the NAS in shared object storage mode [S6] |
 | External load balancer to all servers | Recognition requests distributed across servers; feed management, reports, and Web Console are never load-balanced and always come from the primary [S6] |
-| Server to Internet | Required for online license activation; an offline path exists via `get-license-request` / `insert-license` [S4] |
+| SAFR Server to `cv-instam.real:443` | Licence check-in; offline alternative exists via `get-license-request` / `get-license` / `insert-license` [S9] |
 
 ## 5. TLS and certificates
 
-SSL certificates allow secure https connections between SAFR Servers and other applications
-such as SAFR Desktop Clients, SAFR Mobile Clients, and web browsers. [S11]
+SSL certificates allow secure https connections between SAFR Servers and other applications such as SAFR Desktop Clients, SAFR Mobile Clients, and web browsers. [S11]
 
-**Security-critical default:** SAFR Platform installations automatically include self-signed
-SSL certificates, and because all newly installed SAFR Platforms use the same default
-self-signed SSL certificates, these certificates only provide moderate security, at best. The
-vendor recommends replacing them with either custom generated self-signed certificates or
-standard certificates from a trusted certificate authority. [S11]
+**Security-critical default:** SAFR Platform installations automatically include self-signed SSL certificates, and because all newly installed SAFR Platforms use the same default self-signed SSL certificates, these certificates only provide moderate security, at best. The vendor recommends replacing them with either custom generated self-signed certificates or standard certificates from a trusted certificate authority. [S11]
 
-Raise this proactively on any on-prem deployment review: a shared, publicly known default key
-pair means TLS provides encryption but effectively no server authentication.
+Raise this proactively on any on-prem deployment review: a shared, publicly known default key pair means TLS provides encryption but effectively no server authentication.
 
 ### 5.1 Certificate tool
 
@@ -90,45 +82,35 @@ usage: configure-ssl.py [-h] [-d] [-g] [-p] [-c] [-v] [-q] [-f]
 | `-q`, `--quiet` | Display only ERROR logs |
 | `-f`, `--force` | Override warnings |
 
-Generate a custom self-signed certificate: open a command prompt, navigate to your SAFR
-Server's folder, and run `python configure-ssl.py -g`. [S11]
+Only `-p` / `--public-key` is read-only. Generate a custom self-signed certificate by opening a command prompt, navigating to the SAFR Server's folder, and running `python configure-ssl.py -g`. [S11]
 
-**Two defects in this doc page, both logged as gaps:**
+**Two defects on this doc page, both logged as gaps:**
 
-- It prints the default install location as `C:Files`, a broken rendering of
-  `C:\Program Files\RealNetworks\SAFR`. [INFERRED - verify]
-  - The sentence giving the output location of the generated certificate and private key is
-    truncated mid-sentence: "are located at as". The actual output path is therefore
-      **Not documented**.
+| Defect | Impact |
+|---|---|
+| Default install location printed as `C:Files` | Broken rendering of `C:\Program Files\RealNetworks\SAFR`. [INFERRED - verify] |
+| Sentence giving the generated certificate and key output location is truncated to "are located at as" | The output path for the generated cert and private key is **Not documented** |
 
-      ### 5.2 Prerequisites for a CA-issued certificate
+### 5.2 Prerequisites for a CA-issued certificate
 
-      Before installing a standard, non-self-signed certificate you must first configure a DNS
-      hostname for the server within your network domain. [S11]
+Before installing a standard, non-self-signed certificate you must first configure a DNS hostname for the server within your network domain. [S11]
 
-      - A DNS **A record** is required, documented example: `safr.example.com A 12.34.56.78` [S11]
-      - Use a **static IP**. The docs warn that with DHCP, if the address changes the DNS hostname
-        entry stops working until you update it. [S11]
-        - Static IP details to obtain from the network administrator: static IP address, subnet mask,
-          default gateway. [S11]
+| Requirement | Detail |
+|---|---|
+| DNS A record | Documented example: `safr.example.com A 12.34.56.78` |
+| Static IP | The docs warn that with DHCP, if the address changes the DNS hostname entry stops working until you update it |
+| Data to collect | Static IP address, subnet mask, default gateway |
 
-          ### 5.3 Binding the hostname
+### 5.3 Binding the hostname
 
-          After DNS exists, `reconfigure` sets the hostname the SAFR Server uses, and takes a second
-          argument declaring whether an SSL certificate chain is used. See `operations.md` section 6. [S4]
+After DNS exists, `reconfigure` sets the hostname the SAFR Server uses and takes a second argument declaring whether an SSL certificate chain is used. See `operations.md` section 6. [S4]
 
-          Mismatch between the certificate common name and the name clients use is the usual cause of
-          trust warnings after this step. [INFERRED - verify]
+Mismatch between the certificate common name and the name clients actually use is the usual cause of trust warnings after this step. [INFERRED - verify]
 
-          ## 6. Proxy support
+## 6. Proxy support
 
-          HTTP/HTTPS forward-proxy configuration for SAFR Server is **Not documented** on any page
-          retrieved. Note that `proxy-discover.py` is unrelated - it is an internal script used during
-          auto-discovery of the primary SAFR Server, not a web proxy setting. [S4] Logged as a gap.
+HTTP/HTTPS forward-proxy configuration for SAFR Server is **Not documented** on any page retrieved. `proxy-discover.py` is unrelated - it is an internal script used during auto-discovery of the primary SAFR Server, not a web proxy setting. [S4] Logged as a gap.
 
-          ## 7. Genetec integration traffic
+## 7. Genetec integration traffic
 
-          Port and protocol requirements for the Genetec integrations are covered in
-          `genetec-integration.md`. The same caution applies: where the Genetec guides do not state a
-          port, do not supply one.
-          
+See `genetec-integration.md`. The same caution applies: where the Genetec guides do not state a port, do not supply one.
