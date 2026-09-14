@@ -1,0 +1,22 @@
+# Troubleshooting ACC Software and Hardware Issues on Avigilon Servers (bundle troubleshooting-avigilon-servers, HTML-ACC-TROUBLESHOOTING-SERVERS-A v3)
+Base: https://docs.avigilon.com/bundle/troubleshooting-avigilon-servers/page/OOW_Support_Guide/<page>
+Scope: out-of-warranty Avigilon servers, 3rd-party servers, VMs.
+
+- Before visit: download nABR (Advanced Bug Report) tool; download firmware/drivers for model. Take notes on site. [before-starting.htm]
+- Disable ACC server service while troubleshooting: services.msc > Avigilon Control Center Server > Properties > Startup type Disabled. [disable-acc-server.htm]
+- nABR: run as administrator > Auto Compress Report > Create Bug Report > wait for white pop-up. [run-nabr-non-linux.htm]
+- Common Dell NVR flow (HD-NVR/NVR3/NVR4/NVR4X/NVR5/AINVR): 1) TSR (Technical Support Report) or DSET (HD-NVR/HD-NVR2) 2) power flush: power down, disconnect power+network, hold power ≥10 s, reconnect, wait ~2 min for iDRAC, power up 3) Dell OpenManage Server Administrator (OMSA desktop icon, Windows admin login) to check hardware; AI NVR: Site Health + storage web UI (https://<ip>/device > Device Logs download) 4) update BIOS/firmware if healthy, else contact Avigilon Support 5) General System Checks. Check Dell.com by service tag for model/warranty. NVR5-PRM-252/288/360/432TB excluded from NVR5 steps. [server-models.htm]
+- HD-NVR firmware list: BIOS, iDRAC w/ Lifecycle Controller, PERC6i/H700 firmware, Broadcom NetXtreme firmware + driver. [hd-nvr.htm]
+- VMA-AIAx (AI Appliance): power flush hold 30 s; Site Health + Manage Storage; https://<ip>/device > Device Logs. [vma-aiax-cgx-xx.htm]
+- VMA-AS1 (black HDVA w/ built-in switch): JMicron HW RAID Manager (Start > All Programs > JMicron HW RAID Manager) > Basic > RAID and Disk Information; failed disks red / Degraded; note serial; replace; drivers per Win10/Win7 KB. 8-port: JBOD steps first. [as1-blk-8-16-24-switch.htm]
+- VMA-AS2/AS3 (white HDVA): Marvell web UI http://127.0.0.1:8845 (loopback only, Windows admin) > Physical Disks (expect port 0-3) > Array 0 > Virtual Disk 0 (RAID 5, Functional; Degraded/PD Missing = failing) > Event Logs; front LEDs; copy serials; RMA if in warranty; AS2 Phison SSD firmware KB; AS3 BIOS from Software Downloads. 8-port: JBOD. [as2-as3-wht-8-16-24-switch.htm]
+- Workstations: power flush 30 s; Dell ePSA (F12 at boot > Diagnostics; memory test ~30 min); note Error Code + Validation number; JBOD. [workstations.htm]
+- 3rd-party server: RAID controller optimal (screenshots), JBOD steps, firmware current. VMs: not formally supported; ensure dedicated resources/disk pooling/NICs, host healthy. [virtual-machines.htm]
+- JBOD: reseat drive (shutdown, unplug, hold power 30 s, reseat SATA/power); Seagate SeaTools Short Drive Self Test + SMART test (screenshots); replace failing drives. [JBOD-troubleshooting.htm]
+- General System Checks: C: ≥20% free; report C:\AvigilonData to Support (Drive C used as data volume KB; "ACC Data for Device was Dropped Due to Storage System Performance" KB); Windows Update; AV exceptions; permissions on %ProgramData%\Avigilon and AppData\Local: Properties > Security > Edit > Authenticated Users/Users Allow (add Authenticated Users to ProgramData\Avigilon\Client if missing). [gen-sys-checks.htm]
+- Final: nABR, fresh TSR if firmware upgraded, folder with all evidence, prepare remote session (Support gives session code), contact Support; may require RAID consistency check. [fin-steps-nABR.htm]
+- DSET: Start > "DSET" > Create an Advanced DSET Report > Hardware/Storage/Software/Log Files. [compile-dset-report.htm]
+- TSR via CMD (HD-NVR2+): admin cmd > `racadm techsupreport collect -t sysinfo,ttylog` (if "no local RAC configuration": cd "C:\Program Files\Dell\sysMgt\idrac" first); `racadm jobqueue view` until 100%; `racadm techsupreport export -f C:\temp\TSR_<servicetag>_<date>.zip`. [get-TSR-Windows-prompt.htm]
+- TSR via iDRAC 7/8 web (default 192.168.0.120): Troubleshooting > SupportAssist (fw ≥2.30.30.30; older = Tech Support Report) > Edit Collection Data: Hardware, RAID Controller Log, OS and Application Data > Apply > Export Support Collection. [get-TSR-via-iDRAC-7or8.htm]
+- TSR via iDRAC 9: Maintenance > SupportAssist > Start a Collection > System information, Storage Logs, OS and Application Data; clear Filter Data > Collect > accept EULA > Save and View. [get-TSR-via-iDRAC-9.htm]
+- TSR on AI NVR: AI NVR WebUI > Device > Support > Dell Support Assist Collection (auto-download). [get-TSR-AI-NVR.htm]
