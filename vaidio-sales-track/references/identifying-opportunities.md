@@ -85,7 +85,7 @@ Key Verticals for Vaidio (14, verbatim):
 13. Stadiums, Events
 14. Transportation Planes, Trains, Transit
 
-"Good to Know": IronYun's market differentiator is a professional-services organisation specialising in custom AI models — contact IronYun to discuss custom applications (Vaidio DIY in platform-components-and-terminology.md; the ST1 custom-model lesson is not captured, see platform-introduction.md).
+"Good to Know": IronYun's market differentiator is a professional-services organisation specialising in custom AI models — contact IronYun to discuss custom applications (Vaidio DIY in platform-components-and-terminology.md; 200+ custom models in production per platform-introduction.md [ST1:ironyun-custom-model-development]).
 
 ## Security application families  [ST3:surveillance-and-security-applications]
 "Surveillance, security and safety" = the core intelligent-video-analytics applications. Every key vertical can use Vaidio for these four:
@@ -213,5 +213,5 @@ Qualification foundation = four things: the vertical; the number of cameras need
 - Weapon detection is the "Specialized Object" analytic — the same name as calculator row 16 `Specialized Object (e.g., weapon) + VS` (appliance-calculator.md). [ST3:vertical-application-examples--education]
 - "Parking management" appears in the Smart Cities and Healthcare lists; the product is PMA / `Parking Facility Management` in other courses (platform-components-and-terminology.md, appliance-calculator.md).
 - The three value vectors are also stated, with different wording, in ST1 (platform-introduction.md): Monitor / real-time alerts; Search; Business-intelligence data. [ST3:vaidio--realtime-search-and-data-applications]
-- Custom AI model development is deferred to IronYun professional services (Vaidio DIY in ST6; the ST1 lesson ironyun-custom-model-development is not captured). [ST3:key-verticals--overview]
+- Custom AI model development is deferred to IronYun professional services (Vaidio DIY in ST6; ST1 lesson ironyun-custom-model-development gives the 200+ models figure). [ST3:key-verticals--overview]
 - "Vaidio as a Service" providers / VaaS-MSP partners are named as the route for small prospects; no provider list is given. [ST3:less-suitable-opportunities]

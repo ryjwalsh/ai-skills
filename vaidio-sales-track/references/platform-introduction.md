@@ -1,103 +1,115 @@
-# Platform introduction — Vaidio University ST1 "Vaidio AI Vision Platform Introduction"
+# Platform introduction and value proposition — Vaidio University ST1 "Vaidio AI Vision Platform Introduction"
 
-> Source: Vaidio University (university.vaidio.ai) course ST1, 21 lessons in four sections, captured 2026-10-17. **PARTIAL capture: 4 of 21 lessons** (introduction, interface-overview, visionai--basics, object-recognition-the-foundation-of-vaidio-visionai); the 17 missing lessons are listed under Source notes. Written-lesson content; the one embedded video (Abbey Road live-stream demo) was not transcribed. No product UI beyond that demo is shown in the captured lessons. Full source table: ../sources.md.
+> Source: Vaidio University (university.vaidio.ai) course ST1, 21 written lessons in 4 sections, captured 2026-10-17 (lessons 4 and 6–21 in a second pass the same day). Written-lesson content plus check-in questions; the one embedded video (lesson 2) was not transcribed. Marketing figures are the course's claims, quoted as stated. Full source table: ../sources.md.
 
 ## At a glance
-Seller-level introduction to the Vaidio AI Vision platform: what Vision AI is, how recognition accuracy grows with training data, and why Vaidio's object-recognition vocabulary (hundreds of object classes, thousands of vehicle makes and models) is the foundation of every application and of the three value vectors (monitor, search, business data). Module objective as inferred from the course outline: introduce the platform, how compute scales, the market opportunity, the problems Vaidio solves, the vertical plays and the value proposition. [inferred] Only the opening lessons are captured; compute, opportunity, problems-solved, analytics, camera-vs-platform, vertical and value-proposition lessons are missing. [ST1:introduction] [ST1:object-recognition-the-foundation-of-vaidio-visionai]
+The seller's primer: what VisionAI is and why it needs GPUs, the market opportunity, the four problems Vaidio solves, the drop-in positioning on existing camera/VMS estates, the analytics catalogue, how compute scales, AI cameras vs Vaidio, vertical plays (education, retail, smart cities, healthcare), custom models, and three value stories. [ST1:introduction] [ST1:value-proposition-summary]
 
 | Quick fact | Value | Src |
 |---|---|---|
-| Platform | Open, multi-functional AI Vision software platform | [ST1:introduction] |
-| Compatibility | Any IP camera; dozens of video management systems (VMS) | [ST1:introduction] |
-| Compute | Powered by NVIDIA GPUs | [ST1:introduction] |
-| Third-party proof point | NVIDIA: out of hundreds of solutions it has worked with, Vaidio is one of a handful ranking highest for platform maturity and real-world customer value | [ST1:introduction] |
-| Recognition vocabulary | Hundreds of object types/classes; thousands of vehicle models (makes and models) | [ST1:interface-overview] [ST1:object-recognition-the-foundation-of-vaidio-visionai] |
-| One-line value statement | Vaidio converts video into actionable, searchable, useful data | [ST1:interface-overview] [ST1:visionai--basics] |
-| Accuracy vs training data | 10 cat images → maybe 50% accuracy on new images; a million or a billion images → 95%, 97% or even 99% | [ST1:visionai--basics] |
-| Three value vectors | Monitor / real-time alerts; Search; Business-intelligence data | [ST1:object-recognition-the-foundation-of-vaidio-visionai] |
+| What Vaidio is | Open, multi-functional AI Vision software platform; any IP camera; NVIDIA GPUs; converts video into actionable, searchable, useful data | [ST1:introduction] [ST1:interface-overview] |
+| VMS integrations | "dozens" (L01) / "30 market-leading video management systems" (L09) | [ST1:introduction] [ST1:a-dropin-solution] |
+| Analytics count | "30 AI video analytics" (summary line and quiz); catalogue of 41 named applications in six groups (L11) | [ST1:vaidio-summary] [ST1:vaidio-analytics] |
+| Recognition vocabulary | hundreds of object types, thousands of vehicle makes/models | [ST1:interface-overview] [ST1:object-recognition-the-foundation-of-vaidio-visionai] |
+| Three value vectors | real-time monitoring/alerting; forensic search; business-intelligence data — every analytic delivers all three | [ST1:object-recognition-the-foundation-of-vaidio-visionai] [ST1:vaidio-analytics] |
+| Compute rule | NVIDIA GPU required; compute grows with cameras x analytics; always caveat "as long as your compute resources can support it"; not every camera needs VisionAI | [ST1:visionai-compute] [ST1:adding-cameras-and-analytics-increases-compute-requirements] |
+| NVIDIA proof point | NVIDIA ranks Vaidio among a handful of hundreds of partner solutions highest for platform maturity and real-world customer value | [ST1:introduction] |
+| Custom models | IronYun professional services; 200+ custom models in production worldwide | [ST1:ironyun-custom-model-development] |
+| Market framing | ~1 billion installed cameras, mostly without intelligence; VisionAI spend projected to exceed $200B "in the next few years" | [ST1:the-opportunity] |
 
-## Open platform claims  [ST1:introduction]
-- Vaidio = an open, multi-functional AI Vision software platform.
-- Works with any IP camera and with dozens of video management systems (VMS).
-- Powered by NVIDIA GPUs.
-- NVIDIA endorsement quoted on the page: out of the hundreds of solutions NVIDIA has worked with, Vaidio is one of a handful ranking highest for platform maturity and real-world customer value — use as a third-party proof point.
-- No check-in question visible on the page.
+## Section 1 — VisionAI overview and opportunity
+- Vaidio is an open, multi-functional AI Vision platform working with any IP camera and dozens of VMSs, powered by NVIDIA GPUs; the NVIDIA endorsement above is offered as a third-party proof point. [ST1:introduction]
+- Interface demo (video): a live Abbey Road, England street camera shown in the Vaidio UI with bounding boxes and labels on every moving object — what an "AI-embedded" stream looks like. [ST1:interface-overview]
+- VisionAI = computer vision that uses trained AI to recognise objects in images/video; AI = programming trained to recognise patterns on its own, improving with more data. Illustration: 10 cat images → ~50% classification accuracy on new images; a million or a billion images → 95–99%. [ST1:visionai--basics]
+- Compute: CPU = general-purpose, sequential, complex decisions; GPU = parallel processing suited to graphics, ML and AI. Vaidio processes video on NVIDIA GPUs and requires NVIDIA-powered compute; keep compute in mind so resources cover the camera count and applications — IronYun provides calculators (see appliance-calculator.md). [ST1:visionai-compute]
+- Object recognition is the foundation: the recognition vocabulary feeds analytic engines that deliver (1) monitoring/real-time alerts — intrusion, access control, PPE, smoke/fire/hazards; (2) search — find objects, people or dangerous conditions in seconds; (3) BI data — counts, patterns, statistics, processes. [ST1:object-recognition-the-foundation-of-vaidio-visionai]
+- Examples: tell animals from humans to suppress false intrusion alerts; search video in seconds instead of hours/days; statistical data for traffic, facility, manufacturing and retail operations. Differentiator claim: a massive proprietary IronYun training dataset vs competitors trained on open-source data. [ST1:examples-of-vaidio-visionai]
+- Opportunity: organisations want concrete AI value; most of the ~1 billion installed cameras lack intelligence and are not effectively monitored because humans can watch only a fraction of real-time video; VisionAI capability is expanding rapidly; spend projected above $200B. [ST1:the-opportunity]
 
-## Interface demo — Abbey Road  [ST1:interface-overview]
-- Live-stream demo video (HubSpot video 163180274602): a live camera stream of Abbey Road, England, shown in the Vaidio interface with bounding boxes and labels on every moving object in real time — this is what an "AI-embedded" video stream looks like.
-- Scale claims: Vaidio recognises hundreds of object types and thousands of vehicle models.
-- One-line value statement: Vaidio converts video into actionable, searchable, useful data.
+## Section 2 — Vaidio overview
+- Problems solved: high false-alert rates from current camera systems; manual, slow, inaccurate video search; video unavailable as a BI data source; single-purpose analytics adding cost and complexity. Vaidio turns video into business data through a single pane of glass. [ST1:problems-vaidio-solves]
+- Drop-in positioning: most enterprises, organisations and cities already run cameras on a VMS, often 10–20 years old; Vaidio is a validated NVIDIA-GPU solution that adds intelligence to that existing, expensive infrastructure; works with any IP camera; integrates with 30 market-leading VMSs. [ST1:a-dropin-solution]
+- Seven-word summary: Broad (30 AI video analytics) · Comprehensive (monitor, search, data) · Powerful (NVIDIA GPUs) · Open (any IP camera) · Flexible (à la carte analytics) · Scalable (1 to 1,000s of cameras) · Simple (deploy in days). [ST1:vaidio-summary]
+- Analytics catalogue (image in the lesson; headings and items verbatim). Most customers start with a handful and add more over time. [ST1:vaidio-analytics]
 
-## VisionAI definitions  [ST1:visionai--basics]
-| Term | Definition given |
+| Group | Applications |
 |---|---|
-| Vaidio | A mature VisionAI platform that converts video into useful, actionable data |
-| VisionAI | The evolution of programmatic computer vision; uses advanced AI to recognise objects in images and video |
-| AI | Programming "trained" to recognise patterns on its own — an evolution of human programming; abundant training data makes it smarter every day |
+| SAFETY, SECURITY, DATA | Intrusion Detection · Anomaly Detection · Crowd · Fall · Loitering · Object Counting · Object Detection · Object Left/Removed · Perimeter Monitoring · Person Counting · PPE (Mask, Uniform) · Scene Change · Sensor Integration · Smoke, Fire · Specialized Object |
+| OPERATIONS | Business Intelligence · Camera Health · Dwell Time · Heat Map · Material Inspection · Privacy Protection · Operational Data |
+| VEHICLES | LPR – Access Control · LPR – Stolen Vehicles · Parking Management · Speed Detection · Traffic Flow · Vehicle Counting · Vehicle Make/Model · Vehicle Wrong Direction |
+| ACCESS CONTROL | Face Recognition · ID Verification · License Plate Recognition · Visitor Check-in |
+| HEALTH SCREENING | Face Mask · Distancing · Occupancy · Temperature |
+| INVESTIGATION & SEARCH | Video Search · Video Evidence |
 
-Accuracy-vs-training-data illustration:
+- Compute caution: Vaidio is compute-efficient relative to alternatives but still needs real compute; requirements rise with camera count and/or analytics count, so more cameras or functions need more back-end hardware — always price hardware and caveat with "as long as your compute resources can support it". Not every camera needs VisionAI, especially at 100s–1,000s of cameras. [ST1:adding-cameras-and-analytics-increases-compute-requirements]
+- AI cameras vs Vaidio (verbatim comparison): [ST1:aienabled-cameras-vs-vaidio]
 
-| Training set | Expected accuracy classifying new images |
+| AI Camera | Vaidio |
 |---|---|
-| 10 cat images | Maybe 50% |
-| A million or a billion images | Patterns beyond human capacity — 95%, 97% or even 99% |
+| Single function (face recognition, intrusion, LPR) | Dozens of video analytics functions |
+| Single function only | Can apply multiple analytics per camera |
+| Static functionality | Can change analytics functions at will |
+| To add a function, must add camera | To add a function, just add a software license |
+| Lower accuracy | Higher accuracy |
+| Real-time only | Real-time monitoring, forensic search, business data |
 
-## Object recognition and the three value vectors  [ST1:object-recognition-the-foundation-of-vaidio-visionai]
-- Accurate object recognition is the foundation of every Vaidio VisionAI application.
-- Recognition "vocabulary": hundreds of object classes and thousands of vehicle makes and models.
-- That vocabulary is fed through video-analytic engines that deliver the three value vectors:
+Rationale given: AI cameras run analytics on a low-power embedded chip; Vaidio runs on high-power NVIDIA GPUs, enabling a broader application set with faster performance and higher accuracy.
 
-| # | Vector | Examples given |
-|---|---|---|
-| 1 | Monitor / real-time alerts | Intrusion detection, access control, PPE, smoke, fire and hazard detection |
-| 2 | Search | Find the "needle in the haystack" in seconds — objects, people, dangerous conditions — during incidents/events |
-| 3 | Business-intelligence data | Counts, patterns, statistics, processes |
+## Section 3 — Vaidio verticals
+- Verticals named here (11): Education; Energy, Utility; Enterprise Campus; Healthcare; Hospitality; Law Enforcement; Manufacturing, Logistics; Retail; Security & Safety; Smart Cities; Stadiums & Events (identifying-opportunities.md carries the 14-vertical list from ST3). [ST1:vaidio-verticals]
 
-The same three vectors are the qualification framework in ST3 (identifying-opportunities.md).
+| Vertical | Narrative points | Application list (verbatim) | Src |
+|---|---|---|---|
+| Education | Perimeter intrusion; face-based staff/student access control; plate-based parking access; crowding, loitering, occupancy; uniform/PPE/mask, smoke and fire; thermal-camera temperature; scene-change alerts for vandalism (wall, door, window); vaping via sensor integration. One platform applied holistically beats adding a single function such as weapon detection | Perimeter security · Access control · License-plate-based access control · Crowding · Loitering · Occupancy · PPE and masks · Smoke and fire · Specialized object (weapon, etc.) · Temperature · Vandalism · Vaping | [ST1:vaidio-education] |
+| Retail | Loss prevention and merchandising optimisation: self-checkout monitoring (items placed in the bin, payment completed); cart-loading patterns as shoplifting indicators; shelf/inventory/warehouse monitoring; shopper and store analytics, hot/cold zones, dwell points; reduce shrinkage, optimise operations, lift revenue | Loss prevention enhancement · Self-checkout monitoring · Shoplift detection · Inventory and warehouse monitoring · Shopper analytics and store data · Hot and cold zones, dwell points · Merchandising and revenue optimization | [ST1:vaidio-retail] |
+| Smart Cities | Traffic analysis, traffic-light, intersection and speed monitoring; ticketing-system integration for automated vehicle ticketing; any camera becomes an LPR camera (stolen-vehicle monitoring); smoke and fire; traffic data to justify federal infrastructure funding | Facility security · Access control · Traffic analysis · Traffic light monitoring · Intersection monitoring · Speed monitoring · Automated vehicle ticketing · LPR for stolen vehicles · Smoke and fire · Parking management | [ST1:vaidio-smart-cities] |
+| Healthcare | Privacy first: face/body/person blurring, un-blur only through an audited process by authorised personnel; FR access control for staff/patients; LPR for emergency-vehicle access and parking; shipping/receiving insight; out-of-bed alerts to prevent patient falls (major liability); tracking wheelchairs and mobile nursing computer stations ("multi-million-dollar impact") | Privacy blurring · Intrusion detection · Patient & staff access control · LPR-based access control · Visitor check-in · Patient monitoring · Person fall · Person out-of-bed · Equipment tracking · Shipping and receiving · LPR and parking management | [ST1:vaidio-healthcare] |
+
+## Section 4 — Real-world value
+- Custom models: IronYun's professional-services organisation brings custom inferencing models to market; 200+ custom models in production worldwide; custom models work with all Vaidio analytics across the three vectors and complement the à la carte catalogue. [ST1:ironyun-custom-model-development]
+- Three value stories (course figures): [ST1:vaidio-value]
+  1. Enterprise campus security — 2,000 false alerts/month before; 10/month after; stated as a "99.995% reduction" (arithmetically 99.5%) and thousands of staff-hours saved per year.
+  2. Volatile-material storage — conventional smoke/fire detectors alerted too late (millions in preventable losses yearly); earlier smoke detection and faster response; "potentially $Millions in savings annually".
+  3. Paper manufacturing — manual grading of recycled paper bales caused millions in defective goods; a custom analytic grades bales more accurately; "$Millions annually" saved.
+- Value proposition summary (seven points): open platform (any IP camera and VMS); mature platform endorsed by NVIDIA; video → actionable, searchable, usable data; broad functionality, high accuracy, fast alert/search performance; every function offers monitoring, search and BI; professional-services expertise in custom solutions; market leadership in ROI across industries. [ST1:value-proposition-summary]
 
 ## Knowledge checks (facts the course tests)
-- None in the four captured lessons (no check-in question visible in introduction, interface-overview, visionai--basics or object-recognition-the-foundation-of-vaidio-visionai). Check-ins in the 17 uncaptured lessons, if any, are unknown. [ST1:introduction] [ST1:interface-overview] [ST1:visionai--basics] [ST1:object-recognition-the-foundation-of-vaidio-visionai]
-
-## Course structure
-| Section | Lessons (slugs) |
-|---|---|
-| 1 "VisionAI Overview and Opportunity" | introduction, interface-overview, visionai--basics, visionai-compute, object-recognition-the-foundation-of-vaidio-visionai, examples-of-vaidio-visionai, the-opportunity |
-| 2 "Vaidio Overview" [inferred] | problems-vaidio-solves, a-dropin-solution, vaidio-summary, vaidio-analytics, adding-cameras-and-analytics-increases-compute-requirements, aienabled-cameras-vs-vaidio |
-| 3 "Vaidio Verticals" [inferred] | vaidio-verticals, vaidio-education, vaidio-retail, vaidio-smart-cities, vaidio-healthcare, ironyun-custom-model-development |
-| 4 "Real-World Value" [inferred] | vaidio-value, value-proposition-summary |
-
-Section membership of lessons 8–21 is inferred from lesson order; only Section 1 was expanded in the course outline that was captured. [inferred]
+- AI is software programmed to identify patterns from a massive amount of training data (not conscious computers; Vaidio cannot be embedded in a camera's chip; Vaidio uses GPUs, not CPUs). [ST1:visionai-compute]
+- Vaidio does not require new cameras to work properly (False to "requires new cameras"). [ST1:a-dropin-solution]
+- Vaidio does not require specialised purpose-built cameras for LPR (False). [ST1:vaidio-analytics]
+- A CPU is designed for general-purpose computing, sequential processing and complex decision-making. [ST1:value-proposition-summary]
+- Vaidio comes with 30 video analytics. [ST1:value-proposition-summary]
+- Education capabilities include perimeter security, access control and license-plate-based access control. [ST1:value-proposition-summary]
+- Vaidio is not powered by AWS GPUs (False) — it runs on NVIDIA GPUs. [ST1:value-proposition-summary]
+- Adding cameras and analytics increases compute requirements (Yes). [ST1:value-proposition-summary]
 
 ## Lesson index
 | # | Lesson (slug) | Min | Video | Topic |
 |---|---|---|---|---|
-| 1 | introduction | 1 | unknown (not captured) | Open platform, any IP camera, dozens of VMS, NVIDIA GPUs and endorsement |
-| 2 | interface-overview | 3 | 163180274602 (live-stream demo) | Abbey Road live demo; hundreds of object types, thousands of vehicle models |
-| 3 | visionai--basics | 3 | none | VisionAI and AI definitions; accuracy-vs-training-data illustration |
-| 4 | visionai-compute | 3 | not captured | — (not captured) |
-| 5 | object-recognition-the-foundation-of-vaidio-visionai | 2 | unknown (not captured) | Recognition vocabulary; three value vectors |
-| 6 | examples-of-vaidio-visionai | 2 | not captured | — (not captured) |
-| 7 | the-opportunity | 2 | not captured | — (not captured) |
-| 8 | problems-vaidio-solves | 2 | not captured | — (not captured) |
-| 9 | a-dropin-solution | 2 | not captured | — (not captured) |
-| 10 | vaidio-summary | 1 | not captured | — (not captured) |
-| 11 | vaidio-analytics | 3 | not captured | — (not captured) |
-| 12 | adding-cameras-and-analytics-increases-compute-requirements | 3 | not captured | — (not captured) |
-| 13 | aienabled-cameras-vs-vaidio | 3 | not captured | — (not captured) |
-| 14 | vaidio-verticals | 2 | not captured | — (not captured) |
-| 15 | vaidio-education | 5 | not captured | — (not captured) |
-| 16 | vaidio-retail | 4 | not captured | — (not captured) |
-| 17 | vaidio-smart-cities | 4 | not captured | — (not captured) |
-| 18 | vaidio-healthcare | 4 | not captured | — (not captured) |
-| 19 | ironyun-custom-model-development | 2 | not captured | — (not captured) |
-| 20 | vaidio-value | 4 | not captured | — (not captured) |
-| 21 | value-proposition-summary | 3 | not captured | — (not captured) |
+| 1 | introduction | 1 | none | Open platform, NVIDIA endorsement |
+| 2 | interface-overview | 3 | HubSpot 163180274602 | Abbey Road live demo |
+| 3 | visionai--basics | 3 | none | VisionAI / AI definitions, training-data accuracy |
+| 4 | visionai-compute | 3 | none | CPU vs GPU, NVIDIA requirement; 1 check-in |
+| 5 | object-recognition-the-foundation-of-vaidio-visionai | 2 | none | Vocabulary → three value vectors |
+| 6 | examples-of-vaidio-visionai | 2 | none | Three examples, proprietary data claim |
+| 7 | the-opportunity | 2 | none | Market figures |
+| 8 | problems-vaidio-solves | 2 | none | Four problems |
+| 9 | a-dropin-solution | 2 | none | Existing infrastructure, 30 VMSs; 1 check-in |
+| 10 | vaidio-summary | 1 | none | Seven-word summary |
+| 11 | vaidio-analytics | 3 | none (catalogue image) | Analytics catalogue; 1 check-in |
+| 12 | adding-cameras-and-analytics-increases-compute-requirements | 3 | none | Compute caution |
+| 13 | aienabled-cameras-vs-vaidio | 3 | none | Comparison table |
+| 14 | vaidio-verticals | 2 | none | 11 verticals |
+| 15 | vaidio-education | 5 | none | Education play |
+| 16 | vaidio-retail | 4 | none | Retail play |
+| 17 | vaidio-smart-cities | 4 | none | Smart-city play |
+| 18 | vaidio-healthcare | 4 | none | Healthcare play |
+| 19 | ironyun-custom-model-development | 2 | none | Custom models, 200+ in production |
+| 20 | vaidio-value | 4 | none | Three value stories |
+| 21 | value-proposition-summary | 3 | none | Seven differentiators; 5 check-ins |
 
 ## Source notes
-- STATUS: PARTIAL — 4 of 21 lessons captured (introduction, interface-overview, visionai--basics, object-recognition-the-foundation-of-vaidio-visionai). Still to capture, exactly as the notes list them: visionai-compute, examples-of-vaidio-visionai, the-opportunity, problems-vaidio-solves, a-dropin-solution, vaidio-summary, vaidio-analytics, adding-cameras-and-analytics-increases-compute-requirements, aienabled-cameras-vs-vaidio, vaidio-verticals, vaidio-education, vaidio-retail, vaidio-smart-cities, vaidio-healthcare, ironyun-custom-model-development, vaidio-value, value-proposition-summary.
-- Video ids and check-in status for introduction and object-recognition-the-foundation-of-vaidio-visionai are not captured (page text only).
-- The module objective and the section membership of lessons 8–21 are inferred from the course outline and lesson order, not read from the lessons. [inferred]
-- Vocabulary wording differs slightly between lessons: "hundreds of object types and thousands of vehicle models" (interface-overview) vs "hundreds of object classes and thousands of vehicle makes and models" (object-recognition). [ST1:interface-overview] [ST1:object-recognition-the-foundation-of-vaidio-visionai]
-- The three value vectors are worded "Monitor / real-time alerts; Search; Business-intelligence data" here and "real-time monitoring, detection and alerting; investigative/forensic video search; business data and intelligence gathering" in ST3 (identifying-opportunities.md). [ST1:object-recognition-the-foundation-of-vaidio-visionai]
-- ST3 refers to this course's custom-model lesson (ironyun-custom-model-development) for IronYun's custom AI model services; that lesson is among the uncaptured ones (Vaidio DIY is covered in platform-components-and-terminology.md). [ST3:key-verticals--overview]
-- "Powered by NVIDIA GPUs" matches the ST5 platform slide HW line and ST6 Pro Core / Edge hardware statements (release-8.1.md, platform-components-and-terminology.md). [ST1:introduction]
+- "Dozens" of VMSs (L01) vs "30 market-leading" VMSs (L09); "30 AI video analytics" (L10, quiz) vs a 41-item catalogue (L11) — the course uses both framings.
+- The 99.995% figure in L20 does not match its own numbers (2,000 → 10 per month is a 99.5% reduction); quote the raw counts rather than the percentage.
+- Vertical application lists differ slightly from ST3's (education 12 vs 10 items, retail 7 vs 9, healthcare 11 vs 10); identifying-opportunities.md carries the ST3 versions.
+- Vertical list here has 11 entries; ST3 lists 14 key verticals.
