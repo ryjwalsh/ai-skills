@@ -8,14 +8,14 @@ The Sales Certificate Track page (`/training-plan-courses/12702050648`) lists 6 
 
 | ID | Course | URL slug | Lessons | Min | Format | Captured | Reference |
 |----|--------|----------|---------|-----|--------|----------|-----------|
-| ST1 | Vaidio AI Vision Platform Introduction | vaidio-ai-vision-platform-introduction | 21 (4 sections) | 58 | written lessons, some with HubSpot video | **4/21** (introduction, interface-overview, visionai--basics, object-recognition…) | references/platform-introduction.md |
+| ST1 | Vaidio AI Vision Platform Introduction | vaidio-ai-vision-platform-introduction | 21 (4 sections) | 58 | written lessons (one HubSpot video on lesson 2, one catalogue image on lesson 11), 3 check-ins + 5-question summary | 21/21 | references/platform-introduction.md |
 | ST2 | The Vaidio Partner Portal | the-vaidio-partner-portal | 6 | 12 | written lessons + how-to screen videos (poster frames read, videos not played) | 6/6 | references/partner-portal.md |
 | ST3 | Identifying Opportunities | identifying-opportunities | 17 (2 sections) | 45 | written lessons, 1 check-in | 17/17 | references/identifying-opportunities.md |
 | ST4 | Appliance Calculator | appliance-calculator | 3 | 14 | written lessons + 2 screenshots of the calculator sheet (read), 2 check-ins | 3/3 | references/appliance-calculator.md |
 | ST5 | Vaidio 8.1 Release | vaidio-8.1-release | 9 | 16 | **video-only** (HubSpot screen recordings and slides, no captions, no text, no check-ins) — frames sampled every ~10 s, narration not recovered | 9/9 (frames only) | references/release-8.1.md |
 | ST6 | Vaidio Terminology & Key Concepts | vaidio-terminology-and-key-concepts | 24 | 25 | written lessons + HubSpot video per lesson, 3 check-ins + 5-question summary | 24/24 | references/platform-components-and-terminology.md |
 
-Totals: 80 lessons, ~170 minutes; 63 lessons captured (79%). Lesson-level HubSpot video IDs (`play.hubspotvideo.com/v/7620582/id/<id>`) are in each reference's "Lesson index".
+Totals: 80 lessons, ~170 minutes; 80 lessons captured (100%). Lesson-level HubSpot video IDs (`play.hubspotvideo.com/v/7620582/id/<id>`) are in each reference's "Lesson index".
 
 ## Lesson slugs per course (for `?lesson=` URLs)
 - **ST1** vaidio-ai-vision-platform-introduction: introduction, interface-overview, visionai--basics, visionai-compute, object-recognition-the-foundation-of-vaidio-visionai, examples-of-vaidio-visionai, the-opportunity, problems-vaidio-solves, a-dropin-solution, vaidio-summary, vaidio-analytics, adding-cameras-and-analytics-increases-compute-requirements, aienabled-cameras-vs-vaidio, vaidio-verticals, vaidio-education, vaidio-retail, vaidio-smart-cities, vaidio-healthcare, ironyun-custom-model-development, vaidio-value, value-proposition-summary

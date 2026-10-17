@@ -2,11 +2,9 @@
 
 Anything listed here was **not** answered by the Vaidio University sales courses captured on 2026-10-17. Do not fill these from general knowledge; retrieve them (re-run the capture, open the Partner Portal, or ask Vaidio sales support) and then update the references.
 
-## 1. Lessons not captured (17 of 80)
+## 1. Lessons not captured
 
-| Course | Missing | Why | How to close |
-|---|---|---|---|
-| ST1 Vaidio AI Vision Platform Introduction | visionai-compute, examples-of-vaidio-visionai, the-opportunity, problems-vaidio-solves, a-dropin-solution, vaidio-summary, vaidio-analytics, adding-cameras-and-analytics-increases-compute-requirements, aienabled-cameras-vs-vaidio, vaidio-verticals, vaidio-education, vaidio-retail, vaidio-smart-cities, vaidio-healthcare, ironyun-custom-model-development, vaidio-value, value-proposition-summary | Browser extension stopped responding during the capture run | Re-read `https://university.vaidio.ai/vaidio-ai-vision-platform-introduction?lesson=<slug>` (written lessons, ~45 min of reading); expected content: compute scaling, AI-enabled cameras vs Vaidio, vertical plays with examples, custom-model development, value proposition. Interim coverage: identifying-opportunities.md (verticals, vectors) and platform-components-and-terminology.md (DIY / custom models). Also re-read ST1 `introduction` and `object-recognition-the-foundation-of-vaidio-visionai` for their video ids and any check-in questions, which were not recorded. |
+None - all 80 lessons were read (ST1 lessons 4 and 6-21 in a second pass on 2026-10-17).
 
 ## 2. Content present in the course but not recoverable from the page
 - **ST5 Vaidio 8.1 Release**: all nine lessons are narrated videos with no text or captions; release-8.1.md holds only what the slides and screens show. The spoken rationale, any numbers quoted aloud, and the "Modularization" bullet of the summary slide are not captured. Retrieve: Partner Portal Resource Library ("AI Friday Forum | 8.0 Release" recording and 8.1 release materials) or the 8.1 release notes on the Support Portal.
@@ -30,6 +28,9 @@ Anything listed here was **not** answered by the Vaidio University sales courses
 | Parking product name | PMA / Parking Management Application (ST6), `Parking Facility Management` (ST4 row 17), "Parking management" (ST3) | all three references |
 | Command Center naming | ST4 sheet says "control center" | appliance-calculator.md |
 | Ideal camera threshold | ">100 cameras" (ST3 L06) vs "100+ cameras" (ST3 L07) | identifying-opportunities.md |
+| VMS and analytics counts | "dozens" of VMSs (ST1 L01) vs 30 (ST1 L09); "30 AI video analytics" (ST1 L10/quiz) vs a 41-item catalogue (ST1 L11) | platform-introduction.md |
+| False-alert percentage | ST1 L20 states a 99.995% reduction for 2,000 -> 10 alerts/month (arithmetically 99.5%) | platform-introduction.md |
+| Vertical lists | ST1 names 11 verticals and 12/7/10/11-item application lists; ST3 names 14 key verticals and 10/9/10/10-item lists | platform-introduction.md, identifying-opportunities.md |
 | Vertical counts | ST3 L11 announces five target verticals with examples; L09 lists 14 key verticals | identifying-opportunities.md |
 | GPU requirement | ST5 slide: every deployment form "with NVIDIA GPU"; ST6: Command Center needs no GPU | release-8.1.md, platform-components-and-terminology.md |
 | Dates | ST5 slides carry a 2025 confidentiality footer, a 10/25/24 summary slide and "GA September 2024" | release-8.1.md |
@@ -37,7 +38,6 @@ Anything listed here was **not** answered by the Vaidio University sales courses
 | Vendor name | Courses alternate between IronYun (pricebook, helpdesk, portal branding, professional services) and Vaidio (product, university) | all references |
 
 ## 5. Suggested retrieval order
-1. Re-capture the 17 ST1 lessons (written; quickest win).
-2. Partner Portal > Resource Library: pull the 8.1 and later release decks to replace the frame-only ST5 reference, and the Essentials analytics chart.
-3. Ask Vaidio sales support for the current pricebook SKU list and licence term definitions.
-4. Partner Portal > Calculators: run the Capacity and Storage calculators and record inputs/outputs (also a `vaidio` skill gap).
+1. Partner Portal > Resource Library: pull the 8.1 and later release decks to replace the frame-only ST5 reference, and the Essentials analytics chart.
+2. Ask Vaidio sales support for the current pricebook SKU list and licence term definitions.
+3. Partner Portal > Calculators: run the Capacity and Storage calculators and record inputs/outputs (also a `vaidio` skill gap).

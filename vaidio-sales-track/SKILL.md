@@ -8,14 +8,17 @@ description: Sales and pre-sales knowledge of the Vaidio AI Vision Platform from
 What Vaidio (formerly IronYun) teaches its channel partners about selling the platform: vocabulary, components, licensing, who to sell to, how to size, where the partner resources are, and what changed in release 8.1. Pair it with `vaidio-technical-training` (how to configure it) and `vaidio` (vendor PDFs: install, ports, operations). [ST1]-[ST6]
 
 ## Scope and freshness
-- Captured **2026-10-17** from university.vaidio.ai (partner login). 6 courses, 80 lessons, **63 captured**: ST1 is partial (4 of 21 lessons; see known-gaps.md) and ST5 is video-only, reconstructed from frames without narration.
+- Captured **2026-10-17** from university.vaidio.ai (partner login). 6 courses, **80 of 80 lessons** captured (ST1 lessons 4 and 6-21 in a second pass the same day). ST5 is video-only and reconstructed from frames without narration.
 - The Sales Certificate Track page says completed courses are logged toward certification and that "Certifications will come online soon" - there is no sales exam yet.
 - The content predates Vaidio 9.x/10.x in places (8.1 GA September 2024 is the newest release covered). Licence names and SKUs should be confirmed against the current IronYun pricebook before quoting.
 
 ## Quick facts
 | Item | Value | Src |
 |---|---|---|
-| What Vaidio is | Open, multi-functional AI Vision software platform; any IP camera, dozens of VMSs, NVIDIA GPUs; converts video into actionable, searchable data; hundreds of object types, thousands of vehicle models | ST1 |
+| What Vaidio is | Open, multi-functional AI Vision software platform; any IP camera, "dozens" / 30 market-leading VMSs, NVIDIA GPUs; "30 AI video analytics" (41-item catalogue); hundreds of object types, thousands of vehicle models; deploy in days, 1 to 1,000s of cameras | ST1 |
+| Four problems solved | false alerts; slow manual video search; video unusable as BI data; single-purpose analytics adding cost and complexity | ST1 |
+| AI camera vs Vaidio | AI camera = one static function per camera, lower accuracy, real-time only; Vaidio = dozens of functions, several per camera, changed by adding a licence, higher accuracy, real-time + search + data | ST1 |
+| Value stories | campus false alerts 2,000/month -> 10/month; earlier smoke detection in volatile-material storage; custom bale-grading analytic in paper manufacturing ("$Millions annually" each); 200+ custom models in production | ST1 |
 | Three value vectors (every analytic delivers all three) | 1 real-time monitoring/alerting, 2 forensic video search, 3 business data/BI - usually one is the prospect's primary driver | ST3 ST1 |
 | Components | Pro Core (GPU, non-Kubernetes, SMB-to-mid), Enterprise Core (Kubernetes/cloud/HA, ~1,000 cameras), Edge (Jetson, one analytic: LPR / FR / Intrusion / Object Tracking), TED (GenAI edge, early access), Command Center (no analytics, no GPU, alerts from up to 100 servers), Vaidio Data (BI charts), Vaidio DIY (labelling for custom models), PMA (parking app on Intrusion + MMR + LPR) | ST6 |
 | Licensing | Flexible License = Essentials (any 2 analytics) or Advanced (any analytic) x Pro Core or Enterprise Core -> SKUs Pro Essentials, Enterprise Essentials, Pro Advanced, Enterprise Advanced; scope per subscribed camera; recommend <= 3 analytics per camera; 8.1 slide: term licence includes core software, analytics and annual maintenance | ST6 ST5 |
@@ -36,7 +39,7 @@ What Vaidio (formerly IronYun) teaches its channel partners about selling the pl
 | Counting channels for a quote or the Appliance Calculator, detail-extraction multipliers, LPR speed rows, Crowd 30+ definition | references/appliance-calculator.md (ST4) |
 | Where something is in the Partner Portal, support routing, deal registration, demo site | references/partner-portal.md (ST2) |
 | What changed in 8.1 and how the new screens look (Alert triage, CCT, Container ID, TED) | references/release-8.1.md (ST5) |
-| The value proposition, VisionAI basics, NVIDIA proof point, three vectors (partial) | references/platform-introduction.md (ST1) |
+| The value proposition, VisionAI basics, CPU vs GPU, market figures, analytics catalogue, AI-camera comparison, vertical narratives, custom models, value stories | references/platform-introduction.md (ST1) |
 | Something the courses did not cover or lessons not captured | known-gaps.md |
 | Configuring the analytics the seller just promised | the `vaidio-technical-training` skill |
 | Hardware specs, ports, install, licensing mechanics (.info/.key files), maintenance percentages | the `vaidio` skill |
@@ -61,4 +64,4 @@ What Vaidio (formerly IronYun) teaches its channel partners about selling the pl
 - Intrusion on 10 cameras, Smoke & Fire on 3 other cameras, Face Recognition on 7 more, Video Search everywhere -> `Video Search 0 / Intrusion 13 / Face Recognition 7` (20 channels).
 
 ## Knowledge-check highlights
-AI Model is the tool that detects objects; Command Center cannot run analytics; Enterprise Core is the Kubernetes-enabled core; a Profile controls detection parameters at camera level; events live only on the server and alerts are what export; Resources = how many analytics can run simultaneously; a wide angle of view makes plates and faces unusable with distance; TED is the GenAI component limited to a small channel count; the best deal-size estimator is the number of cameras needing analytics. [ST6] [ST3]
+AI Model is the tool that detects objects; Command Center cannot run analytics; Enterprise Core is the Kubernetes-enabled core; a Profile controls detection parameters at camera level; events live only on the server and alerts are what export; Resources = how many analytics can run simultaneously; a wide angle of view makes plates and faces unusable with distance; TED is the GenAI component limited to a small channel count; the best deal-size estimator is the number of cameras needing analytics; Vaidio needs neither new cameras nor purpose-built LPR cameras; it runs on NVIDIA GPUs (not CPUs, not AWS GPUs); it ships 30 analytics; adding cameras or analytics raises compute requirements. [ST6] [ST3] [ST1]
