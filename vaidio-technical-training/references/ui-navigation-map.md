@@ -1,0 +1,48 @@
+# Vaidio Core web UI navigation map — where things live (TT1, TT2, TT3–TT14)
+
+> Synthesised from the UI shown in the Vaidio University videos (Core **7.2.0-1**) and the written analytic courses (7.x–9.x). Paths are `Page > tab > control`; URL paths are those observed in the 7.2 demo server. Newer releases (8.1+) moved per-engine configuration onto a redesigned `Edit Camera` page — see ../../vaidio-sales-track/references/release-8.1.md — and 9.x/10.x may differ again. Verify against the deployed version.
+
+## 1. Two web interfaces
+| Interface | URL | Login | What it does | Src |
+|---|---|---|---|---|
+| Admin Portal | `http://<server-ip>:8000/` → `/system/` | `Account` / `Password` | NIC + static/DHCP IP, time zone, NTP, Admin Portal port (`8000`), online/offline upgrade (`dev / prerelease / release`), `Factory Reset`. Rule: upgrade the Admin Portal before the Main System | [TT1:the-admin-portal] |
+| Core web UI | `http://<server-ip>/login` | `User Account` / `Password`, `Forgot password?`, footer `Version:` | Everything else below; lands on `Search` after login | [TT1:the-admin-portal] [TT2:search-page] |
+
+## 2. Left icon rail (hamburger ≡ expands labels)
+Top → bottom as observed: `Search` (magnifier) · one icon per licensed analytic page (face, LPR, attributes, counting, dwell, `Intrusion` running-person, `Abnormal` exclamation `!`, heatmap/statistics, reports) · `Alert` (bell) · `Camera` (camera icon; red badge when a camera is abnormal) · `NVR` · `User` · `System` (gear). [TT2:camera-page--ip-address-set-up] [TT2:intrusion-tab] [TT5:dashboard]
+
+## 3. Pages and tabs
+| Page (breadcrumb) | URL seen | Tabs | Key controls | Src |
+|---|---|---|---|---|
+| `VAIDIO > Search` | `/videoSearch` | — | camera picker (`Select Camera` → `Camera List` dialog with `Camera ROI`), date/time range, `Search`, `Advanced`, object-family icons (vehicle, person, animal, fire/liquid, warning, tag/hashtag), `Save Filter`, grid / map-pin / layout toggles; header `N results in X second. | Retention Time: …` | [TT2:search-page] [TT2:narrowing-searches] [TT13:other-search-features] |
+| scene window `Original Snapshot \| Scene ID : <id>` | modal | — | `<` `>` stepping; bounding-box toggle → crop strip with `Object Type`, `Confidence`, `Color`, `Width`, `Height`, `Age`, `Gender`, `FR List`, `Name`, `Emotion`, `Make`, `Model`, `LPR List`, `License Plate`, `Speed`, `Mask`, `PPE`; tag (hashtag), download (`.jpg`), crop/zoom, map, play clip, `Track` (Cross Camera Tracking, 8.1) | [TT2:search-page] [TT14:verifying-pixel-size] [TT13:other-search-features] |
+| `VAIDIO > Camera` | `/camera/cameraManagement` | — | filters `Cluster`, `AI Engines`, `Actions`, `Group`, `Camera Name`; `Add Camera`, `Auto Discovery`, `Group`, `Columns`; columns `No.`, `Camera Name`, `Resolution`, `Group`, `AI Engines` (codes), `Status`, `Abnormal Check`, `Actions` (toggle, pencil/`…`) | [TT1:setting-up-intrusion-detection] [TT2:camera-page--ip-address-set-up] |
+| `Add Camera` / `Edit Camera` dialog | modal | engine tabs `General ROI`, `ID`, `OC`, `OWD`, `OLB`, `CD`, `DD`, `PF`, `FR`, `LPR` … | `Camera Info`, `Camera URL` (`Type`, IP+port or `* RTSP`, credentials, `Get RTSP`, `FPS`, `TCP/UDP`, `Detail Extraction`), `NVR` (`Internal Video Recorder`, `NVR`, `Channel ID`), `Advanced` (`AI Model`, `AI Engines`, gear → `Profile`, `Preview`, flip icons); pencil / `Exclude ROI` / ✓ / wrench per engine tab; `Cancel` / `OK` | [TT1:adding-cameras] [TT2:camera-popup-window] [TT9:roi-setup] |
+| `Profile` dialog (gear) | modal | `Object Type` \| `VS` | `Profile List`, profile dropdown (`Default`), per-class enable, `Confidence[0.01 ~ 1.00]`, `Suggested Value`, `Minimum ~ Maximum pxl`; engine tabs such as `FR`, `LPR`, `HA` hold engine parameters; `Save` → name the profile → `Save` | [TT1:setting-up-intrusion-detection] [TT3:fr-parameters] [TT4:profile] [TT7:profile] [TT13:profile] |
+| `VAIDIO > Intrusion` | `/intrusion/intrusionDashboard` | `Dashboard` \| `History` | `Select Camera` → `Intrusion List` dialog; live view + event cards; History: rule picker, date range, `Search`, export, bulk delete | [TT1:managing-incoming-alerts] [TT2:intrusion-tab] |
+| `VAIDIO > Object Counting` | `/objectCounting/dashboard` | `Dashboard` \| `History` | `Counting List` / `Object Type`, object chips, `In` `Out` `Occupancy`, KPI tiles, per-line table, live view, `Count` chart; History granularity `Hourly`/daily/monthly, `Previous Period`, export | [TT1:managing-incoming-alerts] [TT11:dashboard] [TT11:history] |
+| `Abnormal` dashboard (`!`) | — | `Dashboard` \| `History` | aggregates Crowd, Dwell, OWD, OLB, Person Fall; `Select Camera`; filters camera / group / analytic type; `Refresh` pauses the feed; History ≤ 30 days, Excel export | [TT5:dashboard] [TT6:history] [TT10:dashboard] |
+| `VAIDIO > License Plate Recognition` | `/licensePlateRecognition/dashboard`, `/list` | `Dashboard` \| `History` \| `List` | detections with plate text + confidence, vehicle type, `Make & Model:`, `List:`, `Description:`; `List` tab: `List` (manage lists, `New List`, import folder icon), `Add License Plate`, `Import LPR List` | [TT1:setting-up-license-plate-recognition] [TT1:creating-lists] [TT4:lpr-list] |
+| `Face Recognition` page (face icon) | — | `Dashboard` \| `History` \| list page | matched vs unmatched (blank face) cards; face search → `person +` new target; History filters camera, time, lists, similarity | [TT3:face-lists-and-face-matching] [TT3:dashboard] [TT3:history] |
+| `VAIDIO > Alert` | `/alert/alertDashboard`, `/alert/alertRule` | `Dashboard` \| `History` \| `Alert Rule` | map dashboard (list / map-pin / grid, bell filter); `Alert Rule`: `Add Alert` → `Alert Name`, `Add Notes`, `Define Rule` (`Alert Type`, cameras, lists/ROIs/lines, `AND`\|`OR`, `Schedule`), `Trigger (Optional)` (`Trigger Action` default `Email Notification`, `Email`, `Subject`, body template with `{cameraName}`, `{eventTimeStamp…}`) | [TT1:the-alert-tab] [TT2:alert-dashboard-tab] |
+| `VAIDIO > System` | `/system/aimodel` etc. | `General`, `Time`, `Storage`, `Mail`, `Authentication`, `Log`, `Audit Trail`, `License`, `Setting`, `AI Model`, `Utility`; `Restart` | `Mail` = SMTP (IP, port, username, password, protocol); `License` = resources/licence; `Setting`(s) = face upload quality threshold, `Privacy Protection` toggle + `apply`; `AI Model` = `Upload`, active-model checkbox, `Apply`, `Specialized Object Model Name` table | [TT1:setting-up-license-plate-recognition] [TT14:smtp-connectivity] [TT3:face-upload-quality-threshold] [TT3:privacy-protection] [ST6:resources] |
+| `NVR` page | — | — | external NVR: brand, IP, port, admin credentials; 30-s event clips, ≤ 1-hour imports, 5-minute retrieval cooldown; internal recorder licensed separately | [TT14:nvr-connectivity] |
+
+## 4. "Where is the setting?" quick answers
+| Need | Go to | Src |
+|---|---|---|
+| Change the server IP / NTP / time zone | Admin Portal `:8000` → `Network` / `Time` → `Apply` | [TT1:the-admin-portal] |
+| Upgrade software | Admin Portal → `Upgrade` → Step 1 Admin Portal, then Step 2 Main System | [TT1:the-admin-portal] |
+| Add a camera | `Camera` → `Add Camera` → `Camera URL` (`Camera IP Address/Domain Name` + `Get RTSP`, or `RTSP`) → `Preview` → `OK` | [TT2:camera-page--ip-address-set-up] [TT2:rtsp-set-up] |
+| Limit where any analytic looks | `Edit Camera > Advanced > General ROI` (drag corners) | [TT2:general-roi] [TT13:analytic-setup] |
+| Turn on an analytic | `Edit Camera > Advanced > AI Engines` → tick → engine tab → draw → wrench → rules → `Save` → `OK` | [TT2:camera-popup-window] |
+| Change confidence / minimum object size / enabled classes | gear → `Profile > Object Type` | [TT13:profile] |
+| Engine-specific tuning (FR, LPR, HA) | gear → `Profile` → engine tab (`FR`, `LPR`, `HA`) | [TT3:fr-parameters] [TT4:profile] [TT7:profile] |
+| Reuse settings on many cameras | save the `Profile` under a name, then pick it from the profile dropdown on other cameras | [TT3:save-settings--save-profile] |
+| Check what resolution Vaidio actually receives | `Camera` table `Resolution` column or `Edit Camera` `Resolution:` readout | [TT14:camera-resolution] |
+| Measure pixels on target | `Search` → open scene → bounding-box toggle → `Width` / `Height` | [TT14:verifying-pixel-size] |
+| Watch for network trouble on a stream | Live View: green screen, corrupted sections, lag, disconnects | [TT14:network-considerations] |
+| Email alerts | `System > Mail` (SMTP) then `Alert > Alert Rule > Add Alert > Trigger` | [TT14:smtp-connectivity] [TT1:the-alert-tab] |
+| Blur faces for operators | `System > Setting(s)` → `Privacy Protection` → `apply` (analytics still run; permitted users can un-blur per scene) | [TT3:privacy-protection] |
+| Export history | each analytic `History` tab export icon (Excel) | [TT6:history] [TT11:history] |
+| Licence resources in use | `System > License` (Resources) | [ST6:resources] |
