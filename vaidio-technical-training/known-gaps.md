@@ -2,26 +2,25 @@
 
 Anything listed here was **not** answered by the Vaidio University technical courses captured on 2026-10-17. Do not fill these from general knowledge; retrieve them (re-run the capture, open the vendor guide, or ask Vaidio SA) and then update the references.
 
-## 1. Lessons not captured (30 of 174)
+## 1. Lessons not captured
 
-| Course | Missing | Why | How to close |
-|---|---|---|---|
-| TT2 Vaidio Setup Detailed Tutorial | Lessons 1-13: network-setup-instructor-introduction, network-setup-overview, accessing-vaidio-through-windows, accessing-vaidio-through-mac, accessing-vaidio, admin-portal, network-setup-conclusion, license-management-instructor-introduction, license-management-overview, license-page-part-1, support-portal, license-page-part-2, license-management-conclusion | Browser extension stopped responding during the capture run; these video lessons were never opened | Re-run the video capture (seek every 2-3 s, read captions) for `https://university.vaidio.ai/vaidio-setup-detailed-tutorial?lesson=<slug>`; expected content: first-login from Windows/Mac, Admin Portal, `System > License` export/import and Support Portal licence request. Interim coverage: setup-overview-demo.md (Admin Portal) and `vaidio/references/operations.md` (licensing workflow). |
-| TT1 Vaidio Setup Overview | Lesson 8 `the-alert-tab`, video time 60-183 s | Same outage | Re-run from t = 60 s: HTTP notification trigger walk-through, a second alert example, Alert `History` tab. Interim: `vaidio/references/api-integration.md` documents HTTP alert triggers from the 9.3 vendor guide. |
+None - all 174 lessons were read (TT2 lessons 1-13 and the second half of TT1 lesson 8 in a second pass on 2026-10-17).
 
 ## 2. Facts the courses never state
 
 ### A. Defaults and ranges
 - `Dedupe Events` default and `Cooldown Interval` default are not stated in any written course (the 7.2 UI showed ON and `9` s). Crowd `Crowd Threshold`, Dwell `Time Threshold`, OLB trigger time, FR `Similarity threshold`, FR `Quality detection` mode, HA `Quality detection` state, LPR `Mode` default and the `Include Still Object` / `Motion Detection` defaults: **no default stated**.
 - Sensitivity steps other than the default (5 scenes / 10 s) and the quoted fast setting (2 / 5 s); whether the 2 fps sampling rate is configurable. **Not documented.**
-- SMTP port, NVR ports and VMS vendor list/ports. **Not documented** (fields exist; see `vaidio/references/network-ports.md`).
+- SMTP port and NVR ports. **Not documented** (fields exist; see `vaidio/references/network-ports.md`). VMS integrations are named only as Genetec, Network Optix and Milestone (TT1 lesson 8); no ports or setup steps.
+- Support Portal URL: never shown in TT2 lesson 11 (the `vaidio` skill records vaidio.myportallogin.com). Admin Portal default credentials: deferred to the shipped user guide.
+- Three licence-page channel counts on the TT2 demo server were unreadable at video resolution and are omitted.
 - RTSP URL patterns per camera brand: deferred by the course to the "Technical Support User Guide" (vendor PDF S3 in `vaidio/sources.md`). Only Dahua-style examples were observed in the videos.
 - LPR list import file format: deferred to the "License Plate Recognition User Guide" on the Partner Portal.
 - Essentials-tier eligible analytics, licence SKUs and resource costs per engine: sales-track material; see `vaidio-sales-track/known-gaps.md`.
 
 ### B. Features mentioned but not taught
 - Make & Model Recognition, Cross Camera Tracking, Scene Change, PPE, Age & Gender, Illegal Parking, Loitering, People Counting (`PC`), `PWD`, Smoke & Fire, Specialized Object (weapons), Container ID, Vaidio DIY labelling, Parking Management Application - named in engine lists or other courses, no technical course exists for them in the track.
-- The `Alert Rule` tab contents in TT2 are explicitly deferred to "future courses"; the HTTP trigger payload is in the uncaptured TT1 segment.
+- The `Alert Rule` tab contents in TT2 are explicitly deferred to "future courses"; TT1 lesson 8 shows the `HTTP` trigger fields but not an example payload, and never shows the Alert `History` tab.
 - Command Center, Vaidio Data, Vaidio Enterprise/Manager, Edge/TED configuration: not in the technical track (see the `vaidio` skill).
 - Vaidio App (mobile) notification setup: named as an alert channel only.
 
@@ -48,7 +47,7 @@ Anything listed here was **not** answered by the Vaidio University technical cou
 | Course labels | TT4 page `<title>` says "TT6"; TT6 summary says "Object Counting"; TT14 quiz defines "Dedupe" as the phenomenon rather than the control | license-plate-recognition.md, dwell-detection.md, poc-and-demo-playbook.md |
 
 ## 4. Suggested retrieval order
-1. Re-capture TT2 lessons 1-13 and TT1 lesson 8 tail (browser session, ~20 min of video).
-2. Pull the per-analytic User Guides and the Technical Support User Guide from the Partner Portal (ungated PDFs listed in `vaidio/known-gaps.md` section 3) to fill defaults the courses omit.
-3. Confirm with Vaidio SA which LPR speed bands apply to the deployed release.
-4. Confirm the 9.x/10.x names for `Camera Edit` dialog sections, `Profile` tabs and the `Abnormal` dashboard.
+1. Pull the per-analytic User Guides and the Technical Support User Guide from the Partner Portal (ungated PDFs listed in `vaidio/known-gaps.md` section 3) to fill defaults the courses omit.
+2. Confirm with Vaidio SA which LPR speed bands apply to the deployed release.
+3. Confirm the 9.x/10.x names for `Camera Edit` dialog sections, `Profile` tabs and the `Abnormal` dashboard.
+4. Ask Vaidio for the HTTP trigger payload/placeholder reference (the 9.3 HTTP Alert Trigger guide in the `vaidio` skill covers it).

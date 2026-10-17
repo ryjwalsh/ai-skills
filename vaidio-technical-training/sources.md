@@ -8,8 +8,8 @@ The Technical Certificate Track page (`/training-plan-courses/12702069561`) list
 
 | ID | Course | URL slug | Lessons | Min | Format | Captured | Reference |
 |----|--------|----------|---------|-----|--------|----------|-----------|
-| TT1 | Vaidio Setup Overview | vaidio-setup-overview | 8 | 22 | bare mp4 videos (Vaidio 7.2.0-1 demo), burned-in captions, 5 check-ins on the last lesson | 7 full + lesson 8 first 60 s | references/setup-overview-demo.md |
-| TT2 | Vaidio Setup Detailed Tutorial | vaidio-setup-detailed-tutorial | 33 | 41 | bare mp4 videos in 6 sections (7.2.0-1), burned-in captions, no check-ins | lessons 14–33 (20); lessons 1–13 **not captured** | references/setup-detailed-tutorial.md |
+| TT1 | Vaidio Setup Overview | vaidio-setup-overview | 8 | 22 | bare mp4 videos (Vaidio 7.2.0-1 demo), burned-in captions, 5 check-ins on the last lesson | 8/8 | references/setup-overview-demo.md |
+| TT2 | Vaidio Setup Detailed Tutorial | vaidio-setup-detailed-tutorial | 33 | 41 | bare mp4 videos in 6 sections (7.2.0-1), burned-in captions, check-ins on lessons 7 and 13 | 33/33 | references/setup-detailed-tutorial.md |
 | TT3 | Face Recognition | face-recognition | 14 | 15 | written lessons + HubSpot video per lesson + check-ins | 14/14 | references/face-recognition.md |
 | TT4 | License Plate Recognition | license-plate-recognition | 13 | 15 | written + video + check-ins | 13/13 | references/license-plate-recognition.md |
 | TT5 | Crowd Detection | crowd-detection | 9 | 10 | written + video + check-ins | 9/9 | references/crowd-detection.md |
@@ -24,7 +24,7 @@ The Technical Certificate Track page (`/training-plan-courses/12702069561`) list
 | TT14 | Vaidio Proof of Concept & Customer Specific Demos | vaidio-proof-of-concept-customer-specific-demos | 26 | 26 | written + video + check-ins (one video transcribed: verifying-pixel-size) | 26/26 | references/poc-and-demo-playbook.md |
 | — | Synthesis across TT1–TT14 | — | — | — | — | — | references/analytics-parameter-matrix.md, references/ui-navigation-map.md |
 
-Totals: 174 lessons, ~212 minutes; 144 lessons captured (83%). Lesson-level video IDs (HubSpot `play.hubspotvideo.com/v/7620582/id/<id>`) and mp4 names are in each reference's "Lesson index".
+Totals: 174 lessons, ~212 minutes; 174 lessons captured (100%). Lesson-level video IDs (HubSpot `play.hubspotvideo.com/v/7620582/id/<id>`) and mp4 names are in each reference's "Lesson index".
 
 ## Lesson slugs per course (for `?lesson=` URLs)
 - **TT1** vaidio-setup-overview: the-admin-portal, adding-cameras, setting-up-intrusion-detection, setting-up-object-counting, setting-up-license-plate-recognition, creating-lists, managing-incoming-alerts, the-alert-tab

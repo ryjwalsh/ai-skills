@@ -8,14 +8,15 @@ description: Hands-on configuration knowledge of the Vaidio AI Vision Platform f
 Field knowledge from the 14 Vaidio University technical courses: how an integrator actually configures Vaidio Core in the browser, analytic by analytic, and how to run a proof of concept. It complements the sibling `vaidio` skill (vendor PDFs: install, ports, upgrade, operations, API) and the `vaidio-sales-track` skill (positioning, licensing, sizing). [TT1]-[TT14]
 
 ## Scope and freshness
-- Captured **2026-10-17** from university.vaidio.ai (partner login). 14 courses, 174 lessons; **144 captured** (TT1 lesson 8 partial, TT2 lessons 1-13 not captured - see known-gaps.md).
+- Captured **2026-10-17** from university.vaidio.ai (partner login). 14 courses, **174 of 174 lessons** captured (TT2 lessons 1-13 and the second half of TT1 lesson 8 in a second pass the same day).
 - Courses TT3-TT14 are written lessons with check-in questions; TT1-TT2 are screen recordings of **Vaidio 7.2.0-1**, transcribed from burned-in captions. UI names are therefore 7.x-9.x; 8.1 redesigned the `Edit Camera` page and 10.0 changed the container model. **Verify menu names and defaults against the deployed version.**
 - The courses never state a software version for the written lessons; where a default is "not stated" the references say so - do not invent one.
 
 ## Quick facts
 | Item | Value | Src |
 |---|---|---|
-| Core web UI / Admin Portal | `http://<ip>/login` ; `http://<ip>:8000/` (`/system/`: NIC, static/DHCP, `Time Zone`, NTP `pool.ntp.org`, `Upgrade` online/offline, `Factory Reset`) | TT1 |
+| Core web UI / Admin Portal | `http://<ip>/login` ; `http://<ip>:8000/` (`/system/`: `Change Password`, NIC, static/DHCP, `Time Zone`, NTP `pool.ntp.org`, `Upgrade` online/offline, `Factory Reset`). Factory default server IP `192.168.100.100` - put the workstation on `192.168.100.x`, gateway `192.168.100.1`, to reach it | TT1 TT2 |
+| Licensing | `System > License`: `Step 1` `Export` -> `<serial>.info` -> IronYun Support Portal ticket `Licensing/Warranty` -> `.key` returned in the ticket -> `Step 2` `Renew`. Counts are per channel (one analytic on one stream), licences float between cameras, the file is tied to one server, trial licences expire | TT2 |
 | Post-login landing page | `Search` - Video Search is on for every class of the camera's model with no engine enabled | TT2 |
 | Add camera (ONVIF) | `Camera` > `Add Camera` > `Type` `Camera IP Address/Domain Name` > IP + web port (usually `80`) + credentials > `Get RTSP` > pick main stream > `Preview` > `OK`; needs camera ports `80` **and** `554` reachable | TT1 TT2 TT14 |
 | Add camera (RTSP) | `Type` `RTSP` > `rtsp://<ip>:<port, usually 554>/<vendor path>` + credentials > `Preview` > `OK`; test the URL first in VLC `Media > Open Network Stream` | TT2 TT14 |
@@ -27,7 +28,7 @@ Field knowledge from the 14 Vaidio University technical courses: how an integrat
 | Camera baseline | 2 MP (1920x1080) minimum for most use cases; FR frontal at 6-8 ft; LPR frontal, low and close; crowd `Head` type when bodies occlude | TT14 TT3 TT4 TT5 |
 | LPR modes | `Parking Lot` 1x (<10 mph) / `City Road` 2x (10-40) / `Highway` 3x (>40); 3 parking-lot channels ~ 1 highway channel; plate confidence default `30%` | TT4 TT1 |
 | Where results appear | own pages: `Intrusion`, `Object Counting`, `License Plate Recognition`, `Face Recognition`, `Search`; `Abnormal` (`!`) dashboard aggregates Crowd, Dwell, OWD, OLB, Person Fall; every `History` tab looks back 30 days, most export to Excel | TT5-TT13 |
-| Alerts | `Alert` (bell) > `Alert Rule` > `Add Alert` > `Define Rule` (`Alert Type` per engine, cameras/ROIs/lines/lists, `Schedule`) > `Trigger (Optional)` (`Email Notification` default; HTTP, Vaidio App, VMS) | TT1 TT4 TT9 |
+| Alerts | `Alert` (bell) > `Alert Rule` > `Add Alert` > `Define Rule` (`Alert Type` per engine, cameras/ROIs/lines/lists, `Schedule`) > `Trigger (Optional)`: `Email Notification` (default), `HTTP` (`GET` + URL, `Params`/`Authorization`/`Headers`, `Check Connection`), `APP Notification` (iOS/Android); VMS integrations named: Genetec, Network Optix, Milestone; REST API available | TT1 TT4 TT9 |
 | NVR / SMTP | external NVR = brand + IP + port + admin creds, 30-s clips, <=1-h import, 5-min retrieval cooldown, internal recorder licensed separately; SMTP under `System -> Mail` (IP, port, username, password, protocol) | TT14 |
 
 ## Where to look (decision table)
@@ -36,7 +37,7 @@ Field knowledge from the 14 Vaidio University technical courses: how an integrat
 | Which engine does what, tab codes, max object types, camera requirements, every default side by side | references/analytics-parameter-matrix.md |
 | Where a page, tab, dialog or setting lives in the UI; URL paths; "how do I get to X" | references/ui-navigation-map.md |
 | Admin Portal, Add Camera dialog fields, Profile dialog, custom AI models, LPR lists, event dashboards, `Add Alert` dialog (7.2 demo) | references/setup-overview-demo.md (TT1) |
-| ONVIF vs RTSP camera onboarding step by step, General ROI, first Intrusion rule, Video Search and `Camera ROI` search, alert dashboard | references/setup-detailed-tutorial.md (TT2) |
+| Default IP and workstation networking, Admin Portal, licence export/request/apply, ONVIF vs RTSP camera onboarding step by step, General ROI, first Intrusion rule, Video Search and `Camera ROI` search, alert dashboard | references/setup-detailed-tutorial.md (TT2) |
 | Intrusion Detection (`ID`): Exclude ROI, AND/OR, with/without, schedule, sensitivity | references/intrusion-detection.md (TT9) |
 | Object Counting (`OC`): line pairs, In/Out, occupancy, Counting Rule alerts | references/object-counting.md (TT11) |
 | Object Wrong Direction (`OWD`): line pair, red arrow, line spacing | references/object-wrong-direction.md (TT10) |
@@ -62,7 +63,7 @@ Field knowledge from the 14 Vaidio University technical courses: how an integrat
 6. These are training-course facts, not release notes; for licensing, support-portal or install questions defer to the `vaidio` and `vaidio-sales-track` skills.
 
 ## The universal setup flow (memorise this)
-1. **Network first**: Admin Portal `:8000` > `Network` (NIC, static/DHCP) and `Time` (NTP) > `Apply`. [TT1]
+1. **Network first**: reach the appliance at its default `192.168.100.100` from a workstation on `192.168.100.x`; Admin Portal `:8000` > `Network` (pick the interface showing that IP, static/DHCP) and `Time` (NTP) > `Apply`; then license it (`System > License` export `.info` -> Support Portal ticket -> `Renew` with the `.key`). [TT1] [TT2]
 2. **Add the camera**: `Camera` > `Add Camera` > name it > ONVIF (IP + port 80 + creds > `Get RTSP`) or `RTSP` URL > `Preview` shows a **still image** and the real `Resolution`/`FPS` > `OK`. Check the `Resolution` column - sub-streams below 2 MP starve every analytic. [TT2] [TT14]
 3. **Trim the General ROI** if sky/treelines cause noise - it applies to every analytic on that camera. [TT2] [TT13]
 4. **Profile** (gear): enable only the classes you need; `Confidence` 0.50 default (drop to ~0.3 for small/far people); minimum size 30 px (down to 10 with care). Save as a named profile and reuse it across cameras. [TT1] [TT13]
