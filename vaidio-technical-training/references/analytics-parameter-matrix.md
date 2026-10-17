@@ -59,7 +59,7 @@ The `Abnormal` dashboard aggregates Crowd, Dwell, Object Wrong Direction, Object
 | Dwell | `Time Threshold` | — | seconds the object must remain (example 30 s; parking example 60 s) | [TT6:roi-settings] [TT6:summary] |
 | Object Left Behind | trigger time | — | seconds the object stays with **no person** in the ROI; the countdown restarts whenever a person enters | [TT12:roi-settings] [TT12:analytic-setup] |
 | Object Counting | `Enable In Count` / `Enable Out Count` (`Line Direction Count`) | both on | untick one for one-way flows (conveyor, river); direction can be flipped | [TT1:setting-up-object-counting] [TT11:line-settings] |
-| Object Counting alert | `Counting Rule` `In` / `Out` | — | exposes "repeat by object count instead of by minutes" | [TT11:alerts] |
+| Object Counting alert | `Counting Rule` = count type (`Occupancy` default, `In`, `Out`) + comparison + number | `Repeat every [5] minutes after occurrence` on | `Repeat every [N] object count` alternative (demo 100) for "every N parts" use cases | [TT11:alerts] [TT1:the-alert-tab] |
 | Face Recognition | `Minimum face size` | `64 x 64` px | ≥ 100x100 recommended | [TT3:fr-parameters] |
 | Face Recognition | `Similarity threshold` | — | higher = fewer, more accurate matches; affects alerts, authorisations, searches | [TT3:fr-parameters] |
 | Face Recognition | `Quality detection` | — | `Low` / `Medium` / `High`; access control → High/Medium, forensics → Medium/Low | [TT3:fr-parameters] |
@@ -75,7 +75,7 @@ The `Abnormal` dashboard aggregates Crowd, Dwell, Object Wrong Direction, Object
 | Human Attributes search | `Clothing` | — | `Full body`, `Upper body` (long/short sleeves), `Lower body` (pants, shorts, skirts); 10-colour palette | [TT7:finding-target] |
 
 ## 5. Alert delivery channels named by the courses
-Email (SMTP, `System -> Mail`), HTTP notification (e.g. gate sensor / webhook), Vaidio App push, VMS integrations, text/SMS (mentioned once), door/relay signal via HTTP. Rule anatomy everywhere: `Alert` (bell) → `Alert Rule` → `Add Alert` → `Define Rule` (`Alert Type`, cameras / ROIs / lines / lists, optional `Schedule`) → `Trigger (Optional)` (`Trigger Action`, default `Email Notification`) → name → `Save`/`OK`. [TT4:alerts] [TT7:alerts] [TT2:alert-setup-overview] [TT1:the-alert-tab] [TT14:smtp-connectivity]
+`Email Notification` (SMTP, `System -> Mail`), `HTTP` (method `GET` default + URL, `Params` / `Authorization` / `Headers` key-value tabs, `Check Connection`; used for gate sensors, webhooks, production counters), `APP Notification` (Vaidio iOS/Android app), VMS integrations (Genetec, Network Optix, Milestone named), text/SMS (mentioned once), door/relay signal via HTTP; a full REST API exists for pulling the same data. Rule anatomy everywhere: `Alert` (bell) → `Alert Rule` → `Add Alert` → `Define Rule` (`Alert Type`, cameras / ROIs / lines / lists, optional `Schedule`) → `Trigger (Optional)` (`Trigger Action`, default `Email Notification`) → name → `Save`/`OK`. [TT4:alerts] [TT7:alerts] [TT2:alert-setup-overview] [TT1:the-alert-tab] [TT14:smtp-connectivity]
 
 ## 6. Discrepancies to keep in mind
 - LPR mode speed boundaries: 10/40 mph (TT4, ST4) vs 10/50 mph (TT1); cost ratio 1:2:3 is consistent.

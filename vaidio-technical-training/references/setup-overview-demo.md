@@ -1,6 +1,6 @@
 # Vaidio Setup Overview (end-to-end demo) — Vaidio University TT1 "Vaidio Setup Overview"
 
-> Source: Vaidio University (university.vaidio.ai) course TT1, 8 video-only lessons (~22 min of screen recording), captured 2026-10-17 from burned-in captions sampled every 3 s plus UI frames every 20 s. No lesson text exists on these pages. Demo server runs **Vaidio 7.2.0-1**; menu and dialog names below are as shown in that UI and may differ in 9.x/10.x — verify against the deployed version. Lesson 8 is captured for its first 60 s only (see Source notes). Full source table: ../sources.md.
+> Source: Vaidio University (university.vaidio.ai) course TT1, 8 video-only lessons (~22 min of screen recording), captured 2026-10-17 from burned-in captions sampled every 2–3 s plus UI frames every 15–20 s (lesson 8's second half in a second pass the same day). No lesson text exists on these pages. Demo server runs **Vaidio 7.2.0-1**; menu and dialog names below are as shown in that UI and may differ in 9.x/10.x — verify against the deployed version. Full source table: ../sources.md.
 
 ## At a glance
 A recorded "Vaidio Demo" walk-through: Admin Portal network/time/upgrade settings → add cameras (ONVIF and RTSP) → configure Intrusion, Object Counting and LPR → build LPR lists → read the per-analytic event dashboards → open the Alert page. It is the fastest single source for *where things live* in the Core web UI and what the dialogs contain.
@@ -100,12 +100,18 @@ Everything so far (LPR reads, intrusion hits, counts) are **events**; alerts are
 - `VAIDIO > Object Counting` (`/objectCounting/dashboard`): `Dashboard` — toggles `Counting List` / `Object Type`, `Since <date> 00:00:00`, object chips, checkboxes `In` `Out` `Occupancy`, KPI tiles `Total In` / `Total Out` / `Total Occupancy`, table `Object Type` · `Camera Name` · `Line` · `In` · `Out` · `Occupancy` (an In-only line shows `NaN` for Out/Occupancy), live view with line overlays, per-minute `Count` chart. `History` — granularity `Hourly` (also daily/monthly), date-time range, `Search`, chart/table toggle, `Clear`, `Previous Period`, KPI tiles, hourly bars + occupancy line, export icon; narration: exportable to Excel and usable in real time via alerts.
 - `VAIDIO > Alert` (`/alert/alertDashboard`): tabs `Dashboard` \| `History` \| `Alert Rule`; Dashboard opens on a world map (list / map-pin / grid toggles, zoom, bell filter, refresh).
 
-## Alert rules (first 60 s of the lesson)
+## Alert rules
 [TT1:the-alert-tab]
 - Philosophy: Vaidio sits beside existing cameras and VMSs, "make as little noise as possible", and forwards events where they need to go; alerts are the export layer.
 - `Alert Rule` tab (`/alert/alertRule`): filter `Alert Name` + camera; `Add Alert`; table `Alert Name`, type, target/list, schedule (`Forever`), camera, trigger (`HTTP`, …), `Actions`. Demo rule examples: `Welcome Message` (Face Recognition / Forever / Entrance Camera / HTTP), `Whaaat` (Video Search / `#danger` / Office Overview).
 - `Add Alert`: `Alert Name`, `Add Notes`; left `Define Rule` — `Alert Type:` (default `Video Search`; list is per analytic: `License Plate Recognition`, Intrusion, Face Recognition, Crowd Detection, Scene Change, …), camera picker with count, type-specific pickers (Video Search: tag box + object-family icons with `AND`\|`OR`; LPR: list picker with count), `Schedule` (default `Forever`); right `Trigger (Optional)` — `Trigger Action:` default `Email Notification` with `Email:` ("Please enter emails separated by ;"), `Subject:`, body template using placeholders `{cameraName}`, `{eventTimeStamp…}` and an alert-image placeholder [exact spelling partly inferred from a small frame]; bottom table `Action` \| `Trigger (Optional)`; `Cancel` / `OK`.
-- Narration lead-in: for LPR, "notify me when a blacklisted plate shows up" can go out as an email or a full HTTP notification — the HTTP trigger walk-through is in the uncaptured 60–183 s segment.
+- LPR example: "notify me when a blacklisted plate shows up" goes out as an email or an HTTP notification.
+- `Trigger Action:` **`HTTP`**: method dropdown (default `GET`) + `Enter http URL`; tabs `Params` | `Authorization` | `Headers`, each a `Key` / `Value` table with `+`; buttons: image icon (attach the event image [inferred]), `+ Add`, `Check Connection` (tests the endpoint). Anything that can receive a message or a service call "is all built in, you just need to set it up".
+- `Trigger Action:` **`APP Notification`**: push to the Vaidio iOS / Android app (pane shows only `Save`).
+- VMS integrations named: Genetec, Network Optix, Milestone — built to receive events and alerts as they occur.
+- Second example, `Alert Type: Object Counting` (manufacturing): line picker (chart icon + `2 Lines`) opens the `Line List` dialog (`Camera Name` filter, `Search...`, `Clear Selection`, `2 of 2 selected`, table `Camera Name` / `Group Name`, row `Abbey Road (2)`, preview, `OK`); `Object Type:` chips (demo `Car`); `Counting Rule :` = count type (`Occupancy` default, `In`, `Out` [inferred]) + comparison (`>`) + number (demo `In > 100`); checkboxes `Repeat every [5] minutes after occurrence` (default on) and `Repeat every [100] object count` (demo turned this on and the minutes option off, so the alert repeats for every further 100 objects crossing the line); `Schedule`; `OK`. Use: fire an HTTP call each time 100 parts pass so another system can measure production rate.
+- Vaidio also exposes a full REST API for the same data; IronYun uses it for its own custom applications. Closing message: set up the server, add cameras, enable analytics, forward the relevant information to existing systems — the Vaidio UI need not be watched afterwards.
+- The Alert `History` tab is not demonstrated in this lesson.
 
 ## Knowledge checks (facts the course tests)
 [TT1:the-alert-tab]
@@ -128,7 +134,7 @@ Everything so far (LPR reads, intrusion hits, counts) are **events**; alerts are
 | 8 | the-alert-tab | 3 | mp4 `…/8 Demo Course - The Alert Tab.mp4` (183 s) | Alert Dashboard, Alert Rule, `Add Alert`; 5 check-ins |
 
 ## Source notes
-- **Partial capture:** lesson 8 was captured for t = 0–60 s only; the HTTP notification trigger, a second alert example and the Alert `History` tab (t = 60–183 s) are not captured.
+- Lesson 8 never shows the Alert `History` tab; the whole lesson stays in the `Alert Rule` tab and the `Add Alert` dialog.
 - Narration is reconstructed from burned-in captions; short connective phrases were missed at a few timestamps, none affecting a stated value.
 - LPR mode speed bands differ between courses: TT1 says `City Road` up to 50 mph / `Highway` > 50 mph with 2/4/6 fps; TT4 and ST4 say Parking Lot < 10 mph, City Road 10–40 mph, Highway > 40 mph with 1×/2×/3× cost. Treat the mode→cost ratio (3:1) as consistent and the mph boundaries as version-dependent.
 - The demo camera's ONVIF-returned RTSP URL used port `8554`, so "RTSP port default 554" must be confirmed per camera.
