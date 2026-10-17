@@ -54,6 +54,8 @@ No DEPLOYED_VERSION was supplied for this build, so no conflict flags were raise
 | 'Which version added X', hardware/appliance models, sizing, compatibility, deprecations | references/version-matrix.md |
 | Something the docs never covered | known-gaps.md (do not invent an answer) |
 | Read-only health check script | scripts/healthcheck.sh |
+| Step-by-step analytic setup in the web UI (Add/Edit Camera, Profile, ID/OC/OWD/OLB/CD/DD/PF/FR/LPR/HA tabs), per-engine defaults and pixel minimums, POC/demo playbook, UI navigation | the sibling skill `vaidio-technical-training` (Vaidio University Technical Track, captured 2026-10-17) |
+| Positioning, components, licence tiers/SKUs, qualification and verticals, Appliance Calculator channel counting, Partner Portal, 8.1 release features | the sibling skill `vaidio-sales-track` (Vaidio University Sales Track, captured 2026-10-17) |
 
 ## Answering rules for this skill
 
